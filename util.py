@@ -23,3 +23,7 @@ def imsave(im, imName):
     im[im>1.0] = 1.0
     I = Image.fromarray(np.uint8(np.round(im * 255)))
     I.save(imName, 'PNG')
+
+def calcPSNR(gt, I):
+    return 20 * np.log10(1.0 / np.std(gt - I))
+
