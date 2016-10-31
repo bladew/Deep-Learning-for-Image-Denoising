@@ -16,6 +16,9 @@ def conv2d(x, W):
 def max_pool_2x2(x):
   return tf.nn.max_pool(x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
 
+# 8 * Wx + b, all 8 randomly chosen feature map share the same bias
+# 24 * 26 + (8 * 25 + 1) * 24 * 3 + 25 * 24 + 1 = 15697
+
 # setup placeholders
 x = tf.placeholder(tf.float32, shape=[None, 784])
 # y_ = tf.placeholder(tf.float32, shape=[None, 10])
