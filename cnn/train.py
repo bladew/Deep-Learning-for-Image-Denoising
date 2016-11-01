@@ -25,6 +25,9 @@ def max_pool_2x2(x):
 # setup placeholders based on image orientation
 x = tf.placeholder(tf.float32, shape=[None, 321*481])
 vertical = tf.placeholder(tf.bool)
+# 8 * Wx + b, all 8 randomly chosen feature map share the same bias
+# 24 * 26 + (8 * 25 + 1) * 24 * 3 + 25 * 24 + 1 = 15697
+
 # y_ = tf.placeholder(tf.float32, shape=[None, 10])
 # TODO: reshape the image based on its original dimension
 # reshape image based on orientation
