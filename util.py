@@ -1,4 +1,5 @@
 import numpy as np
+import scipy.io
 from PIL import Image
 import os
 
@@ -27,6 +28,17 @@ def imsave(im, imName):
     I.save(imName)
 
 
+def mat_save(filename, img, original = None):
+    if original is None:
+        scipy.io.savemat(filename, {'img':img})
+    else:
+        scipy.io.savemat(filename, {'corrupted':img, 'original':original})
+
+
+def mat_load(filename):
+    return scipy.io.loadmat(filename)
+
+
 def calcPSNR(gt, I):
     return 20 * np.log10(1.0 / np.std(gt - I))
 
@@ -40,6 +52,17 @@ def convert(dir_path):
             name = dir_path+'/'+file
             res = imread(name)
             imsave(res, name.replace(".jpg", ".png"))
+
+
+def corrupt(dir_path):
+    '''
+    Corrupt the png file and save the pair in mat 
+    '''
+    for file in os.listdir(dir_path):
+        if file.endswith(".png"):
+            name = dir_path+'/'+file
+            img = imread(name)
+            mat_save(name.replace(".png", ".mat"), img + np.random.normal(0, 25/255.0, img.shape), img)
 
 
 def select_img(pic_list, dir_path):
@@ -73,7 +96,7 @@ class ImReader(object):
         self.w = 0
         self.h = 0
         for sample in self.read():
-            self.h, self.w = sample.shape
+            self.h, self.w = sample[0].shape
             break
         self.features = self.w * self.h
 
@@ -93,7 +116,24 @@ class ImReader(object):
                     yield res
 
 
-    def corrupt_and_read(self, batch_sz = 1, mean = 0, sigma = 50, vector = False):
+    def read_mat(self, batch_sz = 1, vector = False):
+        x_batch, y_batch = [], []
+        for file in os.listdir(self.path):
+            if file.endswith(".mat"):
+                d = mat_load(self.path + '/' + file)
+                if vector:
+                    x_batch.append(np.reshape(d['corrupted'], (1, -1)))
+                    y_batch.append(np.reshape(d['original'], (1, -1)))
+                else:
+                    x_batch.append(d['corrupted'])
+                    y_batch.append(d['original'])
+                if len(x_batch) == batch_sz:
+                    res_x, res_y = x_batch, y_batch
+                    x_batch, y_batch = [], []
+                    yield res_x, res_y
+
+
+    def corrupt_and_read(self, batch_sz = 1, mean = 0, sigma = 25, vector = False):
         x_batch, y_batch = [], []
         for file in os.listdir(self.path):
             if file.endswith(".png"):
@@ -110,7 +150,7 @@ class ImReader(object):
                     yield res_x, res_y
 
     
-    def gaussian_noise(self, img, mean = 0, sigma = 0.5):
+    def gaussian_noise(self, img, mean = 0, sigma = 25):
         '''
         Apply Gaussian noise to the img.
 
@@ -129,3 +169,4 @@ if __name__ == '__main__':
     # convert("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/test")
     # convert("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
     # select_img("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val68.txt", "/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
+
