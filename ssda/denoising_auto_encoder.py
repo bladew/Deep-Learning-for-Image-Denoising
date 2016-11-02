@@ -7,10 +7,11 @@ import util
 
 class DenoisingAutoEncoder(object):
     """Denoising Auto-Encoder"""
-    def __init__(self, train_reader, batch_sz = 1):
+    def __init__(self, train_reader, batch_sz = 1, epoch = 5):
         super(DenoisingAutoEncoder, self).__init__()
         self.train = train_reader
         self.batch_sz = batch_sz
+        self.epoch = epoch
 
         # Create placeholder
         self.input_corrupt = tf.placeholder(tf.float32, [None, self.train.features])
@@ -39,13 +40,14 @@ class DenoisingAutoEncoder(object):
 
 
     def train(self):
-        for x,y in self.train.corrupt_and_read(self, batch_sz = self.batch_sz, vector = True):
-            feed = {self.input_corrupt: x, self.input_original: y}
-            error, _ = self.sess.run([self.error, self.train_step], feed_dict = feed)
-            print "error is %g"%(error)
+        for i in xrange(self.epoch):
+            for x,y in self.train.read_mat(self, batch_sz = self.batch_sz, vector = True):
+                feed = {self.input_corrupt: x, self.input_original: y}
+                error, _ = self.sess.run([self.error, self.train_step], feed_dict = feed)
+                print "error is %g"%(error)
 
 
 if __name__ == '__main__':
-    train_reader = ImReader("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/test")
+    train_reader = util.ImReader("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/train")
     da = DenoisingAutoEncoder(train_reader)
     da.train()
