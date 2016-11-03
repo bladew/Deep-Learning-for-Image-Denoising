@@ -62,7 +62,7 @@ def corrupt(dir_path):
         if file.endswith(".png"):
             name = dir_path+'/'+file
             img = imread(name)
-            mat_save(name.replace(".png", ".mat"), img + np.random.normal(0, 25/255.0, img.shape), img)
+            mat_save(name.replace(".png", ".mat"), img + np.random.normal(0, 50.0/255.0, img.shape), img)
 
 
 def select_img(pic_list, dir_path):
@@ -169,4 +169,9 @@ if __name__ == '__main__':
     # convert("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/test")
     # convert("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
     # select_img("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val68.txt", "/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
+    corrupt("./images/train")
+    corrupt("./images/test")
+    corrupt("./images/val")
+
+
 

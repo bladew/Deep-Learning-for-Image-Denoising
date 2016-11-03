@@ -26,6 +26,7 @@ def max_pool_2x2(x):
 
 # setup placeholders based on image orientation
 x = tf.placeholder(tf.float32, shape=[None, 321*481])
+y_ = tf.placeholder(tf.float32, shape=[None, 321*481])
 vertical = tf.placeholder(tf.bool)
 
 # reshape image based on orientation
@@ -67,7 +68,7 @@ y_image = tf.sigmoid(conv2d(h_conv4_drop, W_conv5) + b_conv5)
 y = tf.reshape(y_image, [321 * 481])
 
 # Calculate the loss function by mean square cost
-loss = tf.reduce_mean(tf.reduce_sum(tf.square(y - x)))
+loss = tf.reduce_mean(tf.reduce_sum(tf.square(y - y_)))
 train_step = tf.train.AdamOptimizer(1e-4).minimize(loss)
 # correct_prediction = tf.equal(tf.argmax(y_conv,1), tf.argmax(y_,1))
 # accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
@@ -76,23 +77,32 @@ sess = tf.InteractiveSession()
 sess.run(tf.initialize_all_variables())
 
 # num of epoches = 50
+# use images in ./train and ./test as training dataset
+# input and output are squeezed to one dimentional so that placeholers are consistant no matter what dimention the image is
 for _ in range(50):
 	step = 0
-	for image in util.ImReader("../images/train").read():
-		sess.run(train_step, feed_dict={x: image.reshape(1, 321 * 481), vertical: image.shape == (321, 481), keep_prob: 1})
+	for image in util.ImReader("../images/train").read_mat():
+		corrupted, original = image[0][0], image[1][0]
+		sess.run(train_step, feed_dict={x: corrupted.reshape(1, 321 * 481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 1})
 		step += 1
 		if step % 10 == 0:
-			print sess.run(loss, feed_dict={x: image.reshape(1, 321 * 481), vertical: image.shape == (321, 481), keep_prob: 1})
-
-	for image in util.ImReader("../images/test").read():
-		sess.run(train_step, feed_dict={x: image.reshape(1, 321 * 481), vertical: image.shape == (321, 481), keep_prob: 1})
+			print sess.run(loss, feed_dict={x: corrupted.reshape(1, 321 * 481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 1})
+	for image in util.ImReader("../images/test").read_mat():
+		corrupted, original = image[0][0], image[1][0]
+		sess.run(train_step, feed_dict={x: corrupted.reshape(1, 321 * 481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 1})
 		step += 1
 		if step % 10 == 0:
-			print sess.run(loss, feed_dict={x: image.reshape(1, 321 * 481), vertical: image.shape == (321, 481), keep_prob: 1})
+			print sess.run(loss, feed_dict={x: corrupted.reshape(1, 321 * 481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 1})
 
+# run neural network on images in ./image/val
+# save original, corrupted and recovered images
 count = 0
-for image in util.ImReader("../images/val").read():
-	im = sess.run(y_image, feed_dict={x: image.reshape(1, 321*481), vertical: image.shape == (321, 481), keep_prob: 1.0})
-	im = im.reshape(321, 481) if image.shape == (321, 481) else im.reshape(481, 321)
-	util.imsave(im, "../images/result/"+str(count)+".PNG")
+for image in util.ImReader("../images/val").read_mat():
+	corrupted, original = image[0][0], image[1][0]
+	recovered = sess.run(y_image, feed_dict={x: corrupted.reshape(1, 321*481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 1.0})
+	recovered = recovered.reshape(321, 481) if corrupted.shape == (321, 481) else recovered.reshape(481, 321)
+	util.imsave(original, "../images/result2/"+str(count)+"_original.PNG")
+	util.imsave(corrupted, "../images/result2/"+str(count)+"_corrupted.PNG")
+	util.imsave(recovered, "../images/result2/"+str(count)+"_recovered.PNG")
+	print count, "corrupted:", util.calcPSNR(corrupted, original), "recovered:", util.calcPSNR(recovered, original)
 	count += 1
