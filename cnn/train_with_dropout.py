@@ -67,6 +67,11 @@ y_image = tf.sigmoid(conv2d(h_conv4_drop, W_conv5) + b_conv5)
 
 y = tf.reshape(y_image, [321 * 481])
 
+# Get 6x6 patch here
+# y_patch = ...
+# y_patch_ = ...
+# loss = tf.reduce_mean(tf.reduce_sum(tf.squre(y_patch - y_patch_)))
+
 # Calculate the loss function by mean square cost
 loss = tf.reduce_mean(tf.reduce_sum(tf.square(y - y_)))
 train_step = tf.train.AdamOptimizer(1e-4).minimize(loss)
