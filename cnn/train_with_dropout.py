@@ -81,6 +81,8 @@ train_step = tf.train.AdamOptimizer(1e-4).minimize(loss)
 sess = tf.InteractiveSession()
 sess.run(tf.initialize_all_variables())
 
+saver = tf.train.Saver()
+
 # num of epoches = 50
 # use images in ./train and ./test as training dataset
 for _ in range(50):
@@ -97,6 +99,10 @@ for _ in range(50):
 		step += 1
 		if step % 10 == 0:
 			print sess.run(loss, feed_dict={x: corrupted.reshape(1, 321 * 481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 8.0/24.0})
+			
+	save_path = saver.save(sess, "/model.ckpt")
+	print("Model saved in file: %s" % save_path)
+
 
 count = 0
 for image in util.ImReader("../images/val").read_mat():
