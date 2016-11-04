@@ -10,13 +10,13 @@ import os
 	24 * 26 + (8 * 25 + 1) * 24 * 3 + 25 * 24 + 1 = 15697
 '''
 
-def weight_variable(shape):
+def weight_variable(shape, name):
   initial = tf.truncated_normal(shape, stddev = 0.1)
-  return tf.Variable(initial)
+  return tf.Variable(initial, name)
 
-def bias_variable(shape):
+def bias_variable(shape, name):
   initial = tf.constant(0.1, shape=shape)
-  return tf.Variable(initial)
+  return tf.Variable(initial, name)
 
 def conv2d(x, W):
   return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
@@ -111,14 +111,14 @@ for epoch in range(50):
 		if step % 10 == 0:
 			print sess.run(loss, feed_dict={x: corrupted.reshape(1, 321 * 481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 8.0/24.0})
 			
-	save_path = saver.save(sess, "model", global_step=epoch)
+	save_path = saver.save(sess, "model.ckpt")
 	print("Model saved in file: %s" % save_path)
 
 
 count = 0
 for image in util.ImReader("../images/val").read_mat():
 	corrupted, original = image[0][0], image[1][0]
-	recovered = sess.run(y_image, feed_dict={x: corrupted.reshape(1, 321*481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 8.0/24.0})
+	recovered = sess.run(y_image, feed_dict={x: corrupted.reshape(1, 321*481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 1.0})
 	recovered = recovered.reshape(321, 481) if corrupted.shape == (321, 481) else recovered.reshape(481, 321)
 	util.imsave(original, "../images/result3/"+str(count)+"_original.PNG")
 	util.imsave(corrupted, "../images/result3/"+str(count)+"_corrupted.PNG")
