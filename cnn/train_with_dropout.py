@@ -36,33 +36,33 @@ x_image = tf.cond(vertical, lambda: tf.reshape(x, [-1,321,481,1]), lambda: tf.re
 keep_prob = tf.placeholder(tf.float32)
 
 # first layer
-W_conv1 = weight_variable([5, 5, 1, 24])
-b_conv1 = bias_variable([24])
+W_conv1 = weight_variable([5, 5, 1, 24], name='W_conv1')
+b_conv1 = bias_variable([24], name='b_conv1')
 h_conv1 = tf.sigmoid(conv2d(x_image, W_conv1) + b_conv1)
 h_conv1_drop = tf.nn.dropout(h_conv1, keep_prob)
 # h_pool1 = max_pool_2x2(h_conv1)
 
 # second layer
-W_conv2 = weight_variable([5, 5, 24, 24])
-b_conv2 = bias_variable([24])
+W_conv2 = weight_variable([5, 5, 24, 24], name='W_conv2')
+b_conv2 = bias_variable([24], name='b_conv2')
 h_conv2 = tf.sigmoid(conv2d(h_conv1_drop, W_conv2) + b_conv2)
 h_conv2_drop = tf.nn.dropout(h_conv2, keep_prob)
 
 # third layer
-W_conv3 = weight_variable([5, 5, 24, 24])
-b_conv3 = bias_variable([24])
+W_conv3 = weight_variable([5, 5, 24, 24], name='W_conv3')
+b_conv3 = bias_variable([24], name='b_conv3')
 h_conv3 = tf.sigmoid(conv2d(h_conv2_drop, W_conv3) + b_conv3)
 h_conv3_drop = tf.nn.dropout(h_conv3, keep_prob)
 
 # fourth layer
-W_conv4 = weight_variable([5, 5, 24, 24])
-b_conv4 = bias_variable([24])
+W_conv4 = weight_variable([5, 5, 24, 24], name='W_conv4')
+b_conv4 = bias_variable([24], name='b_conv4')
 h_conv4 = tf.sigmoid(conv2d(h_conv3_drop, W_conv4) + b_conv4)
 h_conv4_drop = tf.nn.dropout(h_conv4, keep_prob)
 
 # last layer
-W_conv5 = weight_variable([5, 5, 24, 1])
-b_conv5 = bias_variable([1])
+W_conv5 = weight_variable([5, 5, 24, 1], name='W_conv5')
+b_conv5 = bias_variable([1], name='b_conv5')
 y_image = tf.sigmoid(conv2d(h_conv4_drop, W_conv5) + b_conv5)
 
 y = tf.reshape(y_image, [321 * 481])
@@ -81,11 +81,22 @@ train_step = tf.train.AdamOptimizer(1e-4).minimize(loss)
 sess = tf.InteractiveSession()
 sess.run(tf.initialize_all_variables())
 
-saver = tf.train.Saver()
+saver = tf.train.Saver({
+	'W_conv1': W_conv1,
+	'b_conv1': b_conv1,
+	'W_conv2': W_conv2,
+	'b_conv2': b_conv2,
+	'W_conv3': W_conv3,
+	'b_conv3': b_conv3,
+	'W_conv4': W_conv4,
+	'b_conv4': b_conv4,
+	'W_conv5': W_conv5,
+	'b_conv5': b_conv5
+})
 
 # num of epoches = 50
 # use images in ./train and ./test as training dataset
-for _ in range(50):
+for epoch in range(50):
 	step = 0
 	for image in util.ImReader("../images/train").read_mat():
 		corrupted, original = image[0][0], image[1][0]
@@ -100,7 +111,7 @@ for _ in range(50):
 		if step % 10 == 0:
 			print sess.run(loss, feed_dict={x: corrupted.reshape(1, 321 * 481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 8.0/24.0})
 			
-	save_path = saver.save(sess, "/model.ckpt")
+	save_path = saver.save(sess, "model", global_step=epoch)
 	print("Model saved in file: %s" % save_path)
 
 
