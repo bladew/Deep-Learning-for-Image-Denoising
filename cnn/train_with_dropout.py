@@ -111,8 +111,9 @@ for epoch in range(50):
 		if step % 10 == 0:
 			print sess.run(loss, feed_dict={x: corrupted.reshape(1, 321 * 481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 8.0/24.0})
 			
-	save_path = saver.save(sess, "model.ckpt")
-	print("Model saved in file: %s" % save_path)
+	if epoch % 10 == 0:
+		save_path = saver.save(sess, "model.ckpt", global_step=epoch)
+		print("Model saved in file: %s" % save_path)
 
 
 count = 0
@@ -122,6 +123,5 @@ for image in util.ImReader("../images/val").read_mat():
 	recovered = recovered.reshape(321, 481) if corrupted.shape == (321, 481) else recovered.reshape(481, 321)
 	util.imsave(original, "../images/result3/"+str(count)+"_original.PNG")
 	util.imsave(corrupted, "../images/result3/"+str(count)+"_corrupted.PNG")
-	util.imsave(recovered, "../images/result3/"+str(count)+"_recovered.PNG")
 	print count, "corrupted:", util.calcPSNR(corrupted, original), "recovered:", util.calcPSNR(recovered, original)
 	count += 1
