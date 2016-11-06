@@ -1,4 +1,4 @@
-import tensorflow as tf
+# import tensorflow as tf
 import sys
 import numpy as np
 
@@ -7,11 +7,10 @@ import util
 
 class DenoisingAutoEncoder(object):
     """Denoising Auto-Encoder"""
-    def __init__(self, train_reader, batch_sz = 1, epoch = 5):
+    def __init__(self, train_reader, batch_sz = 1, learning_rate = 1e-4):
         super(DenoisingAutoEncoder, self).__init__()
         self.train = train_reader
         self.batch_sz = batch_sz
-        self.epoch = epoch
 
         # Create placeholder
         self.input_corrupt = tf.placeholder(tf.float32, [None, self.train.features])
@@ -31,7 +30,7 @@ class DenoisingAutoEncoder(object):
         self.error = tf.sqrt(tf.reduce_mean(tf.square(self.input_original - self.h_)))
 
         # Train
-        self.train_step = tf.train.AdamOptimizer(1e-4).minimize(self.error)
+        self.train_step = tf.train.AdamOptimizer(learning_rate).minimize(self.error)
 
         # Initialization
         init = tf.initialize_all_variables()
@@ -39,12 +38,18 @@ class DenoisingAutoEncoder(object):
         self.sess.run(init)
 
 
-    def train(self):
-        for i in xrange(self.epoch):
+    def train(self, epoch = 50):
+        for i in xrange(epoch):
             for x,y in self.train.read_mat(self, batch_sz = self.batch_sz, vector = True):
                 feed = {self.input_corrupt: x, self.input_original: y}
                 error, _ = self.sess.run([self.error, self.train_step], feed_dict = feed)
                 print "error is %g"%(error)
+
+    def test(self, test_reader):
+        for x,y in test_reader.read_mat(self, batch_sz = self.batch_sz, vector = True):
+            feed = {self.input_corrupt: x, self.input_original: y}
+            cleared = self.sess.run([self.h_], feed_dict = feed)
+            print "PSNR change %g -> %g"%(util.calcPSNR(x, y), util.calcPSNR(cleared, y))
 
 
 if __name__ == '__main__':

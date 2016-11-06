@@ -160,7 +160,7 @@ class ImReader(object):
 
         return: corrupted image
         '''
-        return img + np.random.normal(mean, sigma, img.shape)
+        return img + np.random.normal(mean, sigma / 255.0, img.shape)
 
 
 if __name__ == '__main__':
