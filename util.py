@@ -162,6 +162,25 @@ class ImReader(object):
         '''
         return img + np.random.normal(mean, sigma / 255.0, img.shape)
 
+    def im2col(self, I, patchSize, stride=1):
+        '''
+        im2col (sliding) on gray-scale image
+        '''
+        if type(patchSize) is int:
+            patchSize = [patchSize, patchSize]
+         # Parameters
+         I = I.T
+         M, N = I.shape
+         col_extent = N - patchSize[1] + 1
+         row_extent = M - patchSize[0] + 1
+         # Get Starting block indices
+         start_idx = np.arange(patchSize[0])[:,None]*N + np.arange(patchSize[1])
+         # Get offsetted indices across the height and width of input array
+         offset_idx = np.arange(0,row_extent,stride)[:,None]*N + np.arange(0,col_extent,stride)
+         # Get all actual indices & index into input array for final output
+         idx = start_idx.ravel()[:,None] + offset_idx.ravel()
+         out = np.take(I, idx)
+         return out
 
 if __name__ == '__main__':
     pass 
