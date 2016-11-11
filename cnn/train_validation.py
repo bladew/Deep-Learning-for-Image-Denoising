@@ -76,7 +76,6 @@ loss = tf.reduce_mean(tf.reduce_sum(tf.square(y - y_)))
 train_step = tf.train.AdamOptimizer(1e-4).minimize(loss)
 
 sess = tf.InteractiveSession()
-sess.run(tf.initialize_all_variables())
 
 saver = tf.train.Saver({
 	'W_conv1': W_conv1,
@@ -91,36 +90,16 @@ saver = tf.train.Saver({
 	'b_conv5': b_conv5
 })
 
-#num of epoches = 60
-#use images in ./train and ./test as training dataset
-for epoch in range(100):
-	print epoch
-	step = 0
-	for image in util.ImReader("../images/train").read_mat():
-		corrupted, original = image[0][0], image[1][0]
-		sess.run(train_step, feed_dict={x: corrupted.reshape(1, 321 * 481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 0.5})
-		step += 1
-		if step % 10 == 0:
-			print sess.run(loss, feed_dict={x: corrupted.reshape(1, 321 * 481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 0.5})
-	for image in util.ImReader("../images/test").read_mat():
-		corrupted, original = image[0][0], image[1][0]
-		sess.run(train_step, feed_dict={x: corrupted.reshape(1, 321 * 481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 0.5})
-		step += 1
-		if step % 10 == 0:
-			print sess.run(loss, feed_dict={x: corrupted.reshape(1, 321 * 481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 0.5})
 			
-save_path = saver.save(sess, "model")
-print("Model saved in file: %s" % save_path)
-#saver.restore(sess, "model")
-
+saver.restore(sess, "model")
 
 count = 0
-for image in util.ImReader("../images/val").read_mat():
+for image in util.ImReader("../images/train").read_mat():
 	corrupted, original = image[0][0], image[1][0]
 	recovered = sess.run(y_image, feed_dict={x: corrupted.reshape(1, 321*481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (321, 481), keep_prob: 1.0})
 	recovered = recovered.reshape(321, 481) if corrupted.shape == (321, 481) else recovered.reshape(481, 321)
-	util.imsave(original, "../images/result3/"+str(count)+"_original.PNG")
-	util.imsave(corrupted, "../images/result3/"+str(count)+"_corrupted.PNG")
-	util.imsave(recovered, "../images/result3/"+str(count)+"_recovered.PNG")
+	util.imsave(original, "../images/valid_train/"+str(count)+"_original.PNG")
+	util.imsave(corrupted, "../images/valid_train/"+str(count)+"_corrupted.PNG")
+	util.imsave(recovered, "../images/valid_train/"+str(count)+"_recovered.PNG")
 	print count, "corrupted:", util.calcPSNR(corrupted, original), "recovered:", util.calcPSNR(recovered, original)
 	count += 1
