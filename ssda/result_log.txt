@@ -1,0 +1,347 @@
+sda layer = 2, batch_sz = 10, learning_rate =1e-4
+image 0, PSNR change 14.1485 -> 12.2387
+image 1, PSNR change 14.1607 -> 10.8463
+image 2, PSNR change 14.1768 -> 13.4357
+image 3, PSNR change 14.1234 -> 16.9722
+image 4, PSNR change 14.156 -> 13.0858
+image 5, PSNR change 14.1555 -> 12.4887
+image 6, PSNR change 14.1457 -> 16.0534
+image 7, PSNR change 14.1606 -> 15.3838
+image 8, PSNR change 14.166 -> 14.4909
+image 9, PSNR change 14.1203 -> 17.1019
+image 10, PSNR change 14.1367 -> 10.919
+image 11, PSNR change 14.1572 -> 17.4957
+image 12, PSNR change 14.1398 -> 15.5588
+image 13, PSNR change 14.1582 -> 15.8002
+image 14, PSNR change 14.1673 -> 12.7378
+image 15, PSNR change 14.1209 -> 13.4159
+image 16, PSNR change 14.1276 -> 14.0338
+image 17, PSNR change 14.1473 -> 15.7389
+image 18, PSNR change 14.1548 -> 12.3894
+image 19, PSNR change 14.163 -> 11.9136
+image 20, PSNR change 14.1421 -> 10.3226
+image 21, PSNR change 14.1583 -> 12.3482
+image 22, PSNR change 14.1449 -> 13.916
+image 23, PSNR change 14.1343 -> 12.7412
+image 24, PSNR change 14.1733 -> 11.0614
+image 25, PSNR change 14.1492 -> 14.4761
+image 26, PSNR change 14.1423 -> 12.8381
+image 27, PSNR change 14.135 -> 18.0967
+image 28, PSNR change 14.1575 -> 6.9211
+image 29, PSNR change 14.1586 -> 11.8129
+image 30, PSNR change 14.1769 -> 17.0964
+image 31, PSNR change 14.1139 -> 15.7962
+image 32, PSNR change 14.1399 -> 16.6749
+image 33, PSNR change 14.1162 -> 13.6604
+image 34, PSNR change 14.1703 -> 10.8449
+image 35, PSNR change 14.1336 -> 14.7545
+image 36, PSNR change 14.1481 -> 23.6284
+image 37, PSNR change 14.1775 -> 12.1447
+image 38, PSNR change 14.1236 -> 14.4259
+image 39, PSNR change 14.1477 -> 15.7826
+image 40, PSNR change 14.1641 -> 13.5475
+image 41, PSNR change 14.162 -> 12.5214
+image 42, PSNR change 14.1569 -> 14.0446
+image 43, PSNR change 14.15 -> 13.4199
+image 44, PSNR change 14.1584 -> 12.3717
+image 45, PSNR change 14.1564 -> 18.5219
+image 46, PSNR change 14.1399 -> 12.6758
+image 47, PSNR change 14.1363 -> 16.8918
+image 48, PSNR change 14.1732 -> 10.2205
+image 49, PSNR change 14.1388 -> 10.913
+image 50, PSNR change 14.1272 -> 12.875
+image 51, PSNR change 14.1413 -> 15.8222
+image 52, PSNR change 14.1234 -> 12.9241
+image 53, PSNR change 14.1527 -> 17.9862
+image 54, PSNR change 14.1635 -> 13.841
+image 55, PSNR change 14.1554 -> 14.0864
+image 56, PSNR change 14.1431 -> 14.4191
+image 57, PSNR change 14.1713 -> 16.6759
+image 58, PSNR change 14.159 -> 19.2133
+image 59, PSNR change 14.1732 -> 15.7325
+image 60, PSNR change 14.1386 -> 21.2559
+image 61, PSNR change 14.1733 -> 15.6405
+image 62, PSNR change 14.1476 -> 12.0014
+image 63, PSNR change 14.1848 -> 14.233
+image 64, PSNR change 14.1441 -> 13.9128
+image 65, PSNR change 14.1905 -> 11.9408
+image 66, PSNR change 14.1594 -> 20.0199
+image 67, PSNR change 14.162 -> 12.6108
+image 68, PSNR change 14.1416 -> 9.00411
+image 69, PSNR change 14.1834 -> 15.8134
+image 70, PSNR change 14.1732 -> 18.7744
+image 71, PSNR change 14.1423 -> 15.4066
+image 72, PSNR change 14.1535 -> 17.3527
+image 73, PSNR change 14.1469 -> 12.0188
+image 74, PSNR change 14.1205 -> 12.0361
+image 75, PSNR change 14.1313 -> 12.6638
+image 76, PSNR change 14.1393 -> 14.3893
+image 77, PSNR change 14.1282 -> 12.9312
+image 78, PSNR change 14.1584 -> 13.6732
+image 79, PSNR change 14.1311 -> 18.6378
+image 80, PSNR change 14.1521 -> 16.1501
+image 81, PSNR change 14.14 -> 18.1071
+image 82, PSNR change 14.118 -> 13.9542
+image 83, PSNR change 14.1513 -> 13.3648
+image 84, PSNR change 14.1523 -> 8.98337
+image 85, PSNR change 14.157 -> 14.9089
+image 86, PSNR change 14.1894 -> 15.0939
+image 87, PSNR change 14.1345 -> 15.8171
+image 88, PSNR change 14.1125 -> 17.8387
+image 89, PSNR change 14.1643 -> 18.4546
+image 90, PSNR change 14.1335 -> 16.3436
+image 91, PSNR change 14.1494 -> 11.0558
+image 92, PSNR change 14.152 -> 18.4043
+image 93, PSNR change 14.1112 -> 12.3843
+image 94, PSNR change 14.1241 -> 15.4921
+image 95, PSNR change 14.1629 -> 15.2978
+image 96, PSNR change 14.1536 -> 17.8565
+image 97, PSNR change 14.147 -> 13.5875
+image 98, PSNR change 14.1666 -> 13.6878
+image 99, PSNR change 14.1561 -> 10.3424
+
+da layer = 2, batch_sz = 10, learning_rate =1e-4
+image 0, PSNR change 14.1485 -> 12.147
+image 1, PSNR change 14.1607 -> 10.9846
+image 2, PSNR change 14.1768 -> 13.625
+image 3, PSNR change 14.1234 -> 16.9938
+image 4, PSNR change 14.156 -> 13.1203
+image 5, PSNR change 14.1555 -> 12.7413
+image 6, PSNR change 14.1457 -> 16.1717
+image 7, PSNR change 14.1606 -> 15.3591
+image 8, PSNR change 14.166 -> 14.533
+image 9, PSNR change 14.1203 -> 16.9421
+image 10, PSNR change 14.1367 -> 10.9735
+image 11, PSNR change 14.1572 -> 17.3724
+image 12, PSNR change 14.1398 -> 15.6987
+image 13, PSNR change 14.1582 -> 15.876
+image 14, PSNR change 14.1673 -> 12.5617
+image 15, PSNR change 14.1209 -> 13.4768
+image 16, PSNR change 14.1276 -> 14.3159
+image 17, PSNR change 14.1473 -> 15.7232
+image 18, PSNR change 14.1548 -> 12.3703
+image 19, PSNR change 14.163 -> 12.0027
+image 20, PSNR change 14.1421 -> 10.2544
+image 21, PSNR change 14.1583 -> 12.5275
+image 22, PSNR change 14.1449 -> 14.0317
+image 23, PSNR change 14.1343 -> 12.7795
+image 24, PSNR change 14.1733 -> 11.0172
+image 25, PSNR change 14.1492 -> 14.3774
+image 26, PSNR change 14.1423 -> 12.9883
+image 27, PSNR change 14.135 -> 18.109
+image 28, PSNR change 14.1575 -> 6.79283
+image 29, PSNR change 14.1586 -> 11.7814
+image 30, PSNR change 14.1769 -> 17.1773
+image 31, PSNR change 14.1139 -> 15.677
+image 32, PSNR change 14.1399 -> 16.5771
+image 33, PSNR change 14.1162 -> 13.7553
+image 34, PSNR change 14.1703 -> 10.805
+image 35, PSNR change 14.1336 -> 14.7283
+image 36, PSNR change 14.1481 -> 23.5278
+image 37, PSNR change 14.1775 -> 12.3338
+image 38, PSNR change 14.1236 -> 14.484
+image 39, PSNR change 14.1477 -> 15.6612
+image 40, PSNR change 14.1641 -> 13.6134
+image 41, PSNR change 14.162 -> 12.4813
+image 42, PSNR change 14.1569 -> 14.2163
+image 43, PSNR change 14.15 -> 13.5719
+image 44, PSNR change 14.1584 -> 12.6063
+image 45, PSNR change 14.1564 -> 18.6621
+image 46, PSNR change 14.1399 -> 12.5485
+image 47, PSNR change 14.1363 -> 16.9347
+image 48, PSNR change 14.1732 -> 10.3509
+image 49, PSNR change 14.1388 -> 11.1445
+image 50, PSNR change 14.1272 -> 12.8927
+image 51, PSNR change 14.1413 -> 15.7495
+image 52, PSNR change 14.1234 -> 13.1931
+image 53, PSNR change 14.1527 -> 17.8592
+image 54, PSNR change 14.1635 -> 13.7365
+image 55, PSNR change 14.1554 -> 14.1479
+image 56, PSNR change 14.1431 -> 14.3158
+image 57, PSNR change 14.1713 -> 16.5934
+image 58, PSNR change 14.159 -> 19.5022
+image 59, PSNR change 14.1732 -> 15.7758
+image 60, PSNR change 14.1386 -> 21.0605
+image 61, PSNR change 14.1733 -> 15.7743
+image 62, PSNR change 14.1476 -> 12.0057
+image 63, PSNR change 14.1848 -> 14.2307
+image 64, PSNR change 14.1441 -> 13.7927
+image 65, PSNR change 14.1905 -> 11.8909
+image 66, PSNR change 14.1594 -> 20.0883
+image 67, PSNR change 14.162 -> 12.578
+image 68, PSNR change 14.1416 -> 9.18145
+image 69, PSNR change 14.1834 -> 15.6714
+image 70, PSNR change 14.1732 -> 18.5653
+image 71, PSNR change 14.1423 -> 15.4319
+image 72, PSNR change 14.1535 -> 17.4535
+image 73, PSNR change 14.1469 -> 12.079
+image 74, PSNR change 14.1205 -> 12.0432
+image 75, PSNR change 14.1313 -> 12.4828
+image 76, PSNR change 14.1393 -> 14.2753
+image 77, PSNR change 14.1282 -> 12.7539
+image 78, PSNR change 14.1584 -> 13.7202
+image 79, PSNR change 14.1311 -> 18.252
+image 80, PSNR change 14.1521 -> 16.0919
+image 81, PSNR change 14.14 -> 17.8679
+image 82, PSNR change 14.118 -> 13.8993
+image 83, PSNR change 14.1513 -> 13.4589
+image 84, PSNR change 14.1523 -> 8.82762
+image 85, PSNR change 14.157 -> 14.779
+image 86, PSNR change 14.1894 -> 15.0359
+image 87, PSNR change 14.1345 -> 15.8415
+image 88, PSNR change 14.1125 -> 17.7863
+image 89, PSNR change 14.1643 -> 18.5291
+image 90, PSNR change 14.1335 -> 16.6563
+image 91, PSNR change 14.1494 -> 11.1393
+image 92, PSNR change 14.152 -> 18.765
+image 93, PSNR change 14.1112 -> 12.2757
+image 94, PSNR change 14.1241 -> 15.523
+image 95, PSNR change 14.1629 -> 15.1472
+image 96, PSNR change 14.1536 -> 18.0649
+image 97, PSNR change 14.147 -> 13.4869
+image 98, PSNR change 14.1666 -> 13.6769
+image 99, PSNR change 14.1561 -> 10.2329
+
+init error with pretraining:
+batch 0-0, error is 0.254192
+batch 0-1, error is 0.279904
+batch 0-2, error is 0.287408
+batch 0-3, error is 0.242562
+batch 0-4, error is 0.246578
+batch 0-5, error is 0.242241
+batch 0-6, error is 0.257738
+batch 0-7, error is 0.234146
+batch 0-8, error is 0.226461
+batch 0-9, error is 0.245638
+batch 0-10, error is 0.249363
+batch 0-11, error is 0.239896
+batch 0-12, error is 0.29923
+batch 0-13, error is 0.268158
+batch 0-14, error is 0.252302
+batch 0-15, error is 0.220517
+batch 0-16, error is 0.213675
+batch 0-17, error is 0.281492
+batch 0-18, error is 0.262709
+batch 0-19, error is 0.232437
+batch 1-0, error is 0.209242
+batch 1-1, error is 0.217162
+batch 1-2, error is 0.203505
+batch 1-3, error is 0.229732
+batch 1-4, error is 0.254469
+batch 1-5, error is 0.282057
+batch 1-6, error is 0.238466
+batch 1-7, error is 0.255155
+batch 1-8, error is 0.272842
+batch 1-9, error is 0.265615
+batch 1-10, error is 0.266365
+batch 1-11, error is 0.248308
+batch 1-12, error is 0.232837
+batch 1-13, error is 0.237684
+batch 1-14, error is 0.25788
+batch 1-15, error is 0.251021
+batch 1-16, error is 0.249926
+batch 1-17, error is 0.28185
+batch 1-18, error is 0.270243
+batch 1-19, error is 0.266916
+
+sda with pretrain layer = 2, batch_sz = 10, learning_rate =1e-3:
+image 0, PSNR change 14.1485 -> 12.0953
+image 1, PSNR change 14.1607 -> 11.0444
+image 2, PSNR change 14.1768 -> 13.7058
+image 3, PSNR change 14.1234 -> 17.0138
+image 4, PSNR change 14.156 -> 13.1313
+image 5, PSNR change 14.1555 -> 12.857
+image 6, PSNR change 14.1457 -> 16.2341
+image 7, PSNR change 14.1606 -> 15.3577
+image 8, PSNR change 14.166 -> 14.5623
+image 9, PSNR change 14.1203 -> 16.8931
+image 10, PSNR change 14.1367 -> 10.9879
+image 11, PSNR change 14.1572 -> 17.3338
+image 12, PSNR change 14.1398 -> 15.7611
+image 13, PSNR change 14.1582 -> 15.9212
+image 14, PSNR change 14.1673 -> 12.497
+image 15, PSNR change 14.1209 -> 13.515
+image 16, PSNR change 14.1276 -> 14.4436
+image 17, PSNR change 14.1473 -> 15.7239
+image 18, PSNR change 14.1548 -> 12.3602
+image 19, PSNR change 14.163 -> 12.0518
+image 20, PSNR change 14.1421 -> 10.226
+image 21, PSNR change 14.1583 -> 12.6069
+image 22, PSNR change 14.1449 -> 14.0951
+image 23, PSNR change 14.1343 -> 12.8
+image 24, PSNR change 14.1733 -> 10.997
+image 25, PSNR change 14.1492 -> 14.3555
+image 26, PSNR change 14.1423 -> 13.05
+image 27, PSNR change 14.135 -> 18.1395
+image 28, PSNR change 14.1575 -> 6.73712
+image 29, PSNR change 14.1586 -> 11.7872
+image 30, PSNR change 14.1769 -> 17.2149
+image 31, PSNR change 14.1139 -> 15.6339
+image 32, PSNR change 14.1399 -> 16.5374
+image 33, PSNR change 14.1162 -> 13.8042
+image 34, PSNR change 14.1703 -> 10.8015
+image 35, PSNR change 14.1336 -> 14.7244
+image 36, PSNR change 14.1481 -> 23.5321
+image 37, PSNR change 14.1775 -> 12.4105
+image 38, PSNR change 14.1236 -> 14.5124
+image 39, PSNR change 14.1477 -> 15.6093
+image 40, PSNR change 14.1641 -> 13.6402
+image 41, PSNR change 14.162 -> 12.4718
+image 42, PSNR change 14.1569 -> 14.291
+image 43, PSNR change 14.15 -> 13.648
+image 44, PSNR change 14.1584 -> 12.7164
+image 45, PSNR change 14.1564 -> 18.7652
+image 46, PSNR change 14.1399 -> 12.5031
+image 47, PSNR change 14.1363 -> 16.9689
+image 48, PSNR change 14.1732 -> 10.4104
+image 49, PSNR change 14.1388 -> 11.2442
+image 50, PSNR change 14.1272 -> 12.8947
+image 51, PSNR change 14.1413 -> 15.733
+image 52, PSNR change 14.1234 -> 13.3155
+image 53, PSNR change 14.1527 -> 17.8338
+image 54, PSNR change 14.1635 -> 13.6946
+image 55, PSNR change 14.1554 -> 14.1721
+image 56, PSNR change 14.1431 -> 14.2767
+image 57, PSNR change 14.1713 -> 16.5773
+image 58, PSNR change 14.159 -> 19.6418
+image 59, PSNR change 14.1732 -> 15.7757
+image 60, PSNR change 14.1386 -> 21.0013
+image 61, PSNR change 14.1733 -> 15.8387
+image 62, PSNR change 14.1476 -> 12.011
+image 63, PSNR change 14.1848 -> 14.241
+image 64, PSNR change 14.1441 -> 13.7507
+image 65, PSNR change 14.1905 -> 11.8795
+image 66, PSNR change 14.1594 -> 20.1441
+image 67, PSNR change 14.162 -> 12.5702
+image 68, PSNR change 14.1416 -> 9.25897
+image 69, PSNR change 14.1834 -> 15.6223
+image 70, PSNR change 14.1732 -> 18.4734
+image 71, PSNR change 14.1423 -> 15.4341
+image 72, PSNR change 14.1535 -> 17.5139
+image 73, PSNR change 14.1469 -> 12.0981
+image 74, PSNR change 14.1205 -> 12.0497
+image 75, PSNR change 14.1313 -> 12.4015
+image 76, PSNR change 14.1393 -> 14.2163
+image 77, PSNR change 14.1282 -> 12.6719
+image 78, PSNR change 14.1584 -> 13.7476
+image 79, PSNR change 14.1311 -> 18.1104
+image 80, PSNR change 14.1521 -> 16.0744
+image 81, PSNR change 14.14 -> 17.7888
+image 82, PSNR change 14.118 -> 13.8773
+image 83, PSNR change 14.1513 -> 13.5015
+image 84, PSNR change 14.1523 -> 8.76732
+image 85, PSNR change 14.157 -> 14.7266
+image 86, PSNR change 14.1894 -> 15.0241
+image 87, PSNR change 14.1345 -> 15.8436
+image 88, PSNR change 14.1125 -> 17.7685
+image 89, PSNR change 14.1643 -> 18.5967
+image 90, PSNR change 14.1335 -> 16.7956
+image 91, PSNR change 14.1494 -> 11.1733
+image 92, PSNR change 14.152 -> 18.95
+image 93, PSNR change 14.1112 -> 12.2275
+image 94, PSNR change 14.1241 -> 15.5472
+image 95, PSNR change 14.1629 -> 15.0874
+image 96, PSNR change 14.1536 -> 18.1838
+image 97, PSNR change 14.147 -> 13.4403
+image 98, PSNR change 14.1666 -> 13.6835
+image 99, PSNR change 14.1561 -> 10.1939

@@ -9,7 +9,7 @@ from denoising_auto_encoder import DenoisingAutoEncoder
 
 class StackedDenoisingAutoEncoder(object):
     """StackedDenoisingAutoEncoder using DenoisingAutoEncoder"""
-    def __init__(self, train_readers, layer = 2, batch_sz = 10, learning_rate =1e-4, pre_train = False):
+    def __init__(self, train_readers, layer = 2, batch_sz = 10, learning_rate =1e-3, pre_train = False):
         super(StackedDenoisingAutoEncoder, self).__init__()
         self.train_readers = train_readers
         self.layer = layer
@@ -25,7 +25,7 @@ class StackedDenoisingAutoEncoder(object):
 
         # Pretrain
         if pre_train:
-            self.pretrain()
+            self.pretrain(10)
 
         # Create model param
         self.w = [da.w for da in self.das]
@@ -43,7 +43,7 @@ class StackedDenoisingAutoEncoder(object):
             self.layer_nodes.append(h_)
             next_input = h_
 
-        self.h_ = self.layer_nodes[-1]
+        self.h_ = next_input
 
         # Loss func
         self.error = tf.sqrt(tf.reduce_mean(tf.square(self.input_original - self.h_)))
@@ -60,18 +60,19 @@ class StackedDenoisingAutoEncoder(object):
     def pretrain(self, epoch = 30):
         for i in xrange(len(self.das)):
             for _ in xrange(epoch):
+                print "start %d da %d epoch"%(i, _)
                 for reader in self.train_readers:
-                    for x,y in reader.read_mat(20, True):
+                    for x,y in reader.read_mat(10, True):
                         next_input = [x,y]
                         for j in xrange(i):
                             da = self.das[j]
-                            next_input[0] = da.sess.run([da.h], feed_dict = {da.input_corrupt: next_input[0]})
-                            next_input[1] = da.sess.run([da.h], feed_dict = {da.input_corrupt: next_input[1]})
+                            next_input[0] = da.sess.run([da.h_], feed_dict = {da.input_corrupt: next_input[0]})[0]
+                            next_input[1] = da.sess.run([da.h_], feed_dict = {da.input_corrupt: next_input[1]})[0]
                         da = self.das[i]
                         da.sess.run([da.train_step], feed_dict = {da.input_corrupt: next_input[0], da.input_original: next_input[1]})
 
 
-    def train(self, epoch = 50):
+    def train(self, epoch = 10):
         errors = []
         for i in xrange(epoch):
             for label, reader in enumerate(self.train_readers):
@@ -93,16 +94,20 @@ class StackedDenoisingAutoEncoder(object):
     def test(self, test_reader):
         count = 0
         for x,y in test_reader.read_mat(1, True):
-            feed = {self.input_corrupt: x, self.input_original: y}
+            feed = {self.input_corrupt: x[0], self.input_original: y[0]}
             cleared = self.sess.run([self.h_], feed_dict = feed)
             print "image %d, PSNR change %g -> %g"%(count, util.calcPSNR(x[0], y[0]), util.calcPSNR(cleared, y[0]))
             count += 1
+
+
+    # def save_model(self):
+
 
 
 if __name__ == '__main__':
     train_reader1 = util.ImReader("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/train")
     train_reader2 = util.ImReader("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/test")
     test_reader = util.ImReader("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
-    sda = StackedDenoisingAutoEncoder([train_reader1, train_reader2])
+    sda = StackedDenoisingAutoEncoder([train_reader1, train_reader2], pre_train = False)
     sda.train()
     sda.test(test_reader)
