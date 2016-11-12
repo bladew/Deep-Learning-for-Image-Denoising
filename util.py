@@ -62,7 +62,7 @@ def corrupt(dir_path):
         if file.endswith(".png"):
             name = dir_path+'/'+file
             img = imread(name)
-            mat_save(name.replace(".png", ".mat"), img + np.random.normal(0, 25/255.0, img.shape), img)
+            mat_save(name.replace(".png", ".mat"), img + np.random.normal(0, 50/255.0, img.shape), img)
 
 
 def select_img(pic_list, dir_path):
@@ -106,7 +106,7 @@ class ImReader(object):
         for file in os.listdir(self.path):
             if file.endswith(".png"):
                 if vector:
-                    batch.append(np.reshape(imread(self.path + '/' + file), (1, -1)))
+                    batch.append(np.reshape(imread(self.path + '/' + file), -1))
                 else:
                     batch.append(imread(self.path + '/' + file))
                 
@@ -122,8 +122,8 @@ class ImReader(object):
             if file.endswith(".mat"):
                 d = mat_load(self.path + '/' + file)
                 if vector:
-                    x_batch.append(np.reshape(d['corrupted'], (1, -1)))
-                    y_batch.append(np.reshape(d['original'], (1, -1)))
+                    x_batch.append(np.reshape(d['corrupted'], -1))
+                    y_batch.append(np.reshape(d['original'], -1))
                 else:
                     x_batch.append(d['corrupted'])
                     y_batch.append(d['original'])
@@ -139,8 +139,8 @@ class ImReader(object):
             if file.endswith(".png"):
                 original = imread(self.path + '/' + file)
                 if vector:
-                    x_batch.append(np.reshape(self.gaussian_noise(original, mean, sigma), (1, -1)))
-                    y_batch.append(np.reshape(original, (1, -1)))
+                    x_batch.append(np.reshape(self.gaussian_noise(original, mean, sigma), -1))
+                    y_batch.append(np.reshape(original, -1))
                 else:
                     x_batch.append(self.gaussian_noise(original, mean, sigma))
                     y_batch.append(original)
@@ -164,8 +164,8 @@ class ImReader(object):
 
 
 if __name__ == '__main__':
-    pass 
-    # corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/train")
-    # corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/test")
-    # corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
-    # # select_img("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val68.txt", "/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
+    # pass 
+    corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/train")
+    corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/test")
+    corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
+    # select_img("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val68.txt", "/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
