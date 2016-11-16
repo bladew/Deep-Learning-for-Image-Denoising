@@ -196,7 +196,16 @@ class ImReader(object):
 
 
     def reconstruct(self, rows, patch_sz, original_sz):
-        pass
+        '''
+        reconstruct rows of patches into an image
+        '''
+        mm, nn = original_sz
+        t = np.reshape(np.arange(mm * nn),(mm, nn))
+        temp = im2col(t, [patch_sz, patch_sz]).flatten()
+        I = np.bincount(temp, weights=rows.flatten())
+        I /= np.bincount(temp)
+        I = np.reshape(I, (mm, nn))
+        return I
 
 if __name__ == '__main__':
     for x,y in ImReader("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/train").read_patch():
