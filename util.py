@@ -116,7 +116,7 @@ class ImReader(object):
                     yield res
 
 
-    def read_mat(self, batch_sz = 1, patch_sz = 6, vector = False):
+    def read_mat(self, batch_sz = 1, vector = False):
         x_batch, y_batch = [], []
         for file in os.listdir(self.path):
             if file.endswith(".mat"):
@@ -195,22 +195,22 @@ class ImReader(object):
         return out
 
 
-    def reconstruct(self, rows, patch_sz, original_sz):
+    def reconstruct(self, cols, patch_sz, original_sz):
         '''
-        reconstruct rows of patches into an image
+        reconstruct cols of patches into an image
         '''
         mm, nn = original_sz
         t = np.reshape(np.arange(mm * nn),(mm, nn))
-        temp = im2col(t, [patch_sz, patch_sz]).flatten()
-        I = np.bincount(temp, weights=rows.flatten())
+        temp = self.im2col(t, [patch_sz, patch_sz]).flatten()
+        I = np.bincount(temp, weights=cols.flatten())
         I /= np.bincount(temp)
         I = np.reshape(I, (mm, nn))
         return I
 
 if __name__ == '__main__':
-    for x,y in ImReader("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/train").read_patch():
-        print x.shape, x
-        break
+    ir = ImReader("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/train")
+    for x,y in ir.read_mat():
+        print np.sum(x[0] - ir.reconstruct(ir.im2col(x[0], 6), 6, x[0].shape))
     # corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/train")
     # corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/test")
     # corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
