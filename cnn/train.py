@@ -36,10 +36,6 @@ def get_next_batch(batch_size):
 		n = randint(0, nCol - 26)	
 		X.append(corrupted[m:m+26,n:n+26].reshape(26 * 26))
 		y.append(original[m+10:m+16,n+10:n+16].reshape(6 * 6))
-		m = randint(0, nRow - 26)
-		n = randint(0, nCol - 26)	
-		X.append(corrupted[m:m+26,n:n+26].reshape(26 * 26))
-		y.append(original[m+10:m+16,n+10:n+16].reshape(6 * 6))
 	return X, y
 
 images = []
@@ -84,12 +80,11 @@ h_conv3_drop = tf.nn.dropout(h_conv3, keep_prob)
 W_conv4 = weight_variable([5, 5, 24, 24], name='W_conv4')
 b_conv4 = bias_variable([24], name='b_conv4')
 h_conv4 = tf.sigmoid(conv2d(h_conv3_drop, W_conv4, training) + b_conv4)
-h_conv4_drop = tf.nn.dropout(h_conv4, keep_prob)
 
 # Last layer
 W_conv5 = weight_variable([5, 5, 24, 1], name='W_conv5')
 b_conv5 = bias_variable([1], name='b_conv5')
-y_image = tf.sigmoid(conv2d(h_conv4_drop, W_conv5, training) + b_conv5)
+y_image = tf.sigmoid(conv2d(h_conv4, W_conv5, training) + b_conv5)
 
 y = tf.cond(training,
 	lambda: tf.reshape(y_image, [-1, 6 * 6]),
@@ -116,7 +111,7 @@ saver = tf.train.Saver({
 })
 
 # use images in ./train and ./test as training dataset
-for epoch in range(2000):
+for epoch in range(4000):
 	tol_err = 0
 	for step in range(len(images) / 6 + 1):
 		trainX, trainY = get_next_batch(6)
