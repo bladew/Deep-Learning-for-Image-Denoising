@@ -6,7 +6,7 @@ import util
 import os
 import random
 from random import randint
-# sys.path.pop(0)
+
 import train_utils
 
 '''
@@ -38,14 +38,20 @@ h_conv1_drop = tf.nn.dropout(h_conv1, keep_prob)
 W_conv2 = train_utils.weight_variable([5, 5, 24, 24], name='W_conv2')
 b_conv2 = train_utils.bias_variable([24], name='b_conv2')
 h_conv2 = tf.sigmoid(train_utils.conv2d(h_conv1_drop, W_conv2, training) + b_conv2)
+h_conv2_drop = tf.nn.dropout(h_conv2, keep_prob)
+
+# Third layer
+W_conv3 = train_utils.weight_variable([5, 5, 24, 24], name='W_conv3')
+b_conv3 = train_utils.bias_variable([24], name='b_conv3')
+h_conv3 = tf.sigmoid(train_utils.conv2d(h_conv2_drop, W_conv3, training) + b_conv3)
 
 # Last layer
 W_conv5 = train_utils.weight_variable([5, 5, 24, 1], name='W_conv5')
 b_conv5 = train_utils.bias_variable([1], name='b_conv5')
-y_image = tf.sigmoid(train_utils.conv2d(h_conv2, W_conv5, training) + b_conv5)
+y_image = tf.sigmoid(train_utils.conv2d(h_conv3, W_conv5, training) + b_conv5)
 
 y = tf.cond(training,
-	lambda: tf.reshape(y_image, [-1, 14 * 14]),
+	lambda: tf.reshape(y_image, [-1, 10 * 10]),
 	lambda: tf.reshape(y_image, [-1, 321 * 481]))
 
 # Calculate the loss function by mean square cost
@@ -58,6 +64,8 @@ sess.run(tf.initialize_all_variables())
 restorer = tf.train.Saver({
 	'W_conv1': W_conv1,
 	'b_conv1': b_conv1,
+	'W_conv2': W_conv2,
+	'b_conv2': b_conv2,
 })
 
 saver = tf.train.Saver({
@@ -65,22 +73,26 @@ saver = tf.train.Saver({
 	'b_conv1': b_conv1,
 	'W_conv2': W_conv2,
 	'b_conv2': b_conv2,
+	'W_conv3': W_conv3,
+	'b_conv3': b_conv3,
 })
 
-images = train_utils.read_images() 
 
-restorer.restore(sess, 'model-1-9')
+def train(images, restore_path):
+	restorer.restore(sess, restore_path)
 
-# use images in ./train and ./test as training dataset
-for epoch in range(10):
-	tol_err = 0
-	for step in range(len(images) / 6 + 1):
-		trainX, trainY = train_utils.get_next_batch(images, 2)
-		_, err = sess.run([train_step, loss], feed_dict={x: trainX, y_: trainY, training: True, vertical: None, keep_prob: 8.0/24.0})
-		tol_err += err
+	# use images in ./train and ./test as training dataset
+	for epoch in range(10):
+		tol_err = 0
+		for step in range(len(images) / 6 + 1):
+			trainX, trainY = train_utils.get_next_batch(images, hidden_layer_size = 3)
+			_, err = sess.run([train_step, loss], feed_dict={x: trainX, y_: trainY, training: True, vertical: None, keep_prob: 8.0/24.0})
+			tol_err += err
 
-	print epoch, tol_err / step
-	
-# save pretrained result of layer 1
-save_path = saver.save(sess, "model-2", global_step=epoch)
-print("Model saved in file: %s" % save_path)
+		print epoch, tol_err / step
+		
+def save():
+	# save pretrained result of layer 1
+	save_path = saver.save(sess, "./models/model-3")
+	print("Model saved in file: %s" % save_path)
+	return save_path

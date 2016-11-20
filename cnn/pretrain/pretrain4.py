@@ -89,20 +89,24 @@ saver = tf.train.Saver({
 	'b_conv5': b_conv5,
 })
 
-images = train_utils.read_images() 
+def train(images, restore_path):
+	'''
+		apply result of third pretrain for training
+		use images in ./train and ./test as training dataset
+	'''
+	restorer.restore(sess, restore_path)
 
-restorer.restore(sess, 'model-3-9')
+	for epoch in range(10):
+		tol_err = 0
+		for step in range(len(images) / 6 + 1):
+			trainX, trainY = train_utils.get_next_batch(images, hidden_layer_size = 4)
+			_, err = sess.run([train_step, loss], feed_dict={x: trainX, y_: trainY, training: True, vertical: None, keep_prob: 8.0/24.0})
+			tol_err += err
 
-# use images in ./train and ./test as training dataset
-for epoch in range(10):
-	tol_err = 0
-	for step in range(len(images) / 6 + 1):
-		trainX, trainY = train_utils.get_next_batch(images, hidden_layer_size = 4)
-		_, err = sess.run([train_step, loss], feed_dict={x: trainX, y_: trainY, training: True, vertical: None, keep_prob: 8.0/24.0})
-		tol_err += err
+		print epoch, tol_err / step
 
-	print epoch, tol_err / step
-	
-# save pretrained result of layer 1
-save_path = saver.save(sess, "model-4", global_step=epoch)
-print("Model saved in file: %s" % save_path)
+def save():
+	# save pretrained result of layer 1
+	save_path = saver.save(sess, "./models/model-4")
+	print("Model saved in file: %s" % save_path)
+	return save_path
