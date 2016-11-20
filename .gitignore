@@ -1,2 +1,2 @@
-./images/*
-./cnn/models/*
+images/
+cnn/models

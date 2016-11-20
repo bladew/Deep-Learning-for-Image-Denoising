@@ -110,3 +110,17 @@ def save():
 	save_path = saver.save(sess, "./models/model-4")
 	print("Model saved in file: %s" % save_path)
 	return save_path
+
+def test(restore_path):
+	saver.restore(sess, restore_path)
+
+	count = 0
+	for image in util.ImReader("../images/val").read_mat():
+		corrupted, original = image[0][0], image[1][0]
+		recovered = sess.run(y_image, feed_dict={x: corrupted.reshape(1, 321*481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (481, 321), training: False, keep_prob: 1.0})
+		recovered = recovered.reshape(321, 481) if corrupted.shape == (321, 481) else recovered.reshape(481, 321)
+		util.imsave(original, "../images/result_pretrain/"+str(count)+"_original.PNG")
+		util.imsave(corrupted, "../images/result_pretrain/"+str(count)+"_corrupted.PNG")
+		util.imsave(recovered, "../images/result_pretrain/"+str(count)+"_recovered.PNG")
+		print count, "corrupted:", util.calcPSNR(corrupted, original), "recovered:", util.calcPSNR(recovered, original)
+		count += 1
