@@ -345,3 +345,483 @@ image 96, PSNR change 14.1536 -> 18.1838
 image 97, PSNR change 14.147 -> 13.4403
 image 98, PSNR change 14.1666 -> 13.6835
 image 99, PSNR change 14.1561 -> 10.1939
+
+da with patch, batch_sz = 20, patch_sz = 6, learning_rate = 1e-3, epochs = 1, hidden = 100
+0, PSNR change 14.1485 -> 21.7838
+1, PSNR change 14.1607 -> 23.5052
+2, PSNR change 14.1768 -> 23.5195
+3, PSNR change 14.1234 -> 25.6601
+4, PSNR change 14.156 -> 22.9553
+5, PSNR change 14.1555 -> 24.6154
+6, PSNR change 14.1457 -> 24.0045
+7, PSNR change 14.1606 -> 22.1938
+8, PSNR change 14.166 -> 24.4795
+9, PSNR change 14.1203 -> 25.161
+10, PSNR change 14.1367 -> 21.7869
+11, PSNR change 14.1572 -> 24.5429
+12, PSNR change 14.1398 -> 24.7547
+13, PSNR change 14.1582 -> 25.1705
+14, PSNR change 14.1673 -> 22.933
+15, PSNR change 14.1209 -> 22.4761
+16, PSNR change 14.1276 -> 25.9542
+17, PSNR change 14.1473 -> 26.0108
+18, PSNR change 14.1548 -> 22.8255
+19, PSNR change 14.163 -> 22.8696
+20, PSNR change 14.1421 -> 20.474
+21, PSNR change 14.1583 -> 21.9251
+22, PSNR change 14.1449 -> 22.6903
+23, PSNR change 14.1343 -> 22.7847
+24, PSNR change 14.1733 -> 22.8457
+25, PSNR change 14.1492 -> 24.2582
+26, PSNR change 14.1423 -> 23.738
+27, PSNR change 14.135 -> 25.5319
+28, PSNR change 14.1575 -> 22.5845
+29, PSNR change 14.1586 -> 19.4816
+30, PSNR change 14.1769 -> 25.1691
+31, PSNR change 14.1139 -> 20.3884
+32, PSNR change 14.1399 -> 22.9791
+33, PSNR change 14.1162 -> 22.2932
+34, PSNR change 14.1703 -> 24.2966
+35, PSNR change 14.1336 -> 23.9339
+36, PSNR change 14.1481 -> 24.948
+37, PSNR change 14.1775 -> 23.0376
+38, PSNR change 14.1236 -> 24.5094
+39, PSNR change 14.1477 -> 25.3759
+40, PSNR change 14.1641 -> 23.5556
+41, PSNR change 14.162 -> 22.751
+42, PSNR change 14.1569 -> 23.7605
+43, PSNR change 14.15 -> 23.9514
+44, PSNR change 14.1584 -> 21.7583
+45, PSNR change 14.1564 -> 26.8938
+46, PSNR change 14.1399 -> 21.4842
+47, PSNR change 14.1363 -> 23.0159
+48, PSNR change 14.1732 -> 22.4572
+49, PSNR change 14.1388 -> 24.4841
+50, PSNR change 14.1272 -> 22.3227
+51, PSNR change 14.1413 -> 22.6888
+52, PSNR change 14.1234 -> 24.4323
+53, PSNR change 14.1527 -> 25.2867
+54, PSNR change 14.1635 -> 23.3672
+55, PSNR change 14.1554 -> 23.1926
+56, PSNR change 14.1431 -> 20.235
+57, PSNR change 14.1713 -> 24.552
+58, PSNR change 14.159 -> 26.0774
+59, PSNR change 14.1732 -> 25.4456
+60, PSNR change 14.1386 -> 26.324
+61, PSNR change 14.1733 -> 24.9107
+62, PSNR change 14.1476 -> 24.6581
+63, PSNR change 14.1848 -> 22.3006
+64, PSNR change 14.1441 -> 23.2049
+65, PSNR change 14.1905 -> 23.7902
+66, PSNR change 14.1594 -> 27.4069
+67, PSNR change 14.162 -> 20.4538
+68, PSNR change 14.1416 -> 20.7469
+69, PSNR change 14.1834 -> 25.1056
+70, PSNR change 14.1732 -> 25.5853
+71, PSNR change 14.1423 -> 22.983
+72, PSNR change 14.1535 -> 24.317
+73, PSNR change 14.1469 -> 22.6281
+74, PSNR change 14.1205 -> 22.2145
+75, PSNR change 14.1313 -> 24.4277
+76, PSNR change 14.1393 -> 21.7558
+77, PSNR change 14.1282 -> 24.37
+78, PSNR change 14.1584 -> 24.1643
+79, PSNR change 14.1311 -> 26.1321
+80, PSNR change 14.1521 -> 27.9257
+81, PSNR change 14.14 -> 24.6849
+82, PSNR change 14.118 -> 21.2725
+83, PSNR change 14.1513 -> 20.729
+84, PSNR change 14.1523 -> 21.9235
+85, PSNR change 14.157 -> 23.0426
+86, PSNR change 14.1894 -> 23.9943
+87, PSNR change 14.1345 -> 25.263
+88, PSNR change 14.1125 -> 24.0257
+89, PSNR change 14.1643 -> 23.508
+90, PSNR change 14.1335 -> 24.8711
+91, PSNR change 14.1494 -> 22.6015
+92, PSNR change 14.152 -> 25.5853
+93, PSNR change 14.1112 -> 22.3973
+94, PSNR change 14.1241 -> 23.5752
+95, PSNR change 14.1629 -> 20.601
+96, PSNR change 14.1536 -> 24.1607
+97, PSNR change 14.147 -> 22.8888
+98, PSNR change 14.1666 -> 23.362
+99, PSNR change 14.1561 -> 21.8552
+
+da with patch, batch_sz = 20, patch_sz = 6, learning_rate = 1e-3, epochs = 1, hidden = 6 * 6
+0, PSNR change 14.1485 -> 22.0408
+1, PSNR change 14.1607 -> 24.3939
+2, PSNR change 14.1768 -> 23.9826
+3, PSNR change 14.1234 -> 25.8178
+4, PSNR change 14.156 -> 23.715
+5, PSNR change 14.1555 -> 26.4439
+6, PSNR change 14.1457 -> 24.0811
+7, PSNR change 14.1606 -> 22.095
+8, PSNR change 14.166 -> 24.7565
+9, PSNR change 14.1203 -> 25.334
+10, PSNR change 14.1367 -> 22.4471
+11, PSNR change 14.1572 -> 24.5448
+12, PSNR change 14.1398 -> 25.2081
+13, PSNR change 14.1582 -> 25.3655
+14, PSNR change 14.1673 -> 23.2122
+15, PSNR change 14.1209 -> 22.967
+16, PSNR change 14.1276 -> 26.5653
+17, PSNR change 14.1473 -> 26.3565
+18, PSNR change 14.1548 -> 23.2372
+19, PSNR change 14.163 -> 23.2465
+20, PSNR change 14.1421 -> 21.0438
+21, PSNR change 14.1583 -> 22.3944
+22, PSNR change 14.1449 -> 22.8121
+23, PSNR change 14.1343 -> 23.6283
+24, PSNR change 14.1733 -> 23.8782
+25, PSNR change 14.1492 -> 24.6282
+26, PSNR change 14.1423 -> 24.3709
+27, PSNR change 14.135 -> 25.5284
+28, PSNR change 14.1575 -> 24.5482
+29, PSNR change 14.1586 -> 19.4078
+30, PSNR change 14.1769 -> 25.1926
+31, PSNR change 14.1139 -> 20.2205
+32, PSNR change 14.1399 -> 23.0423
+33, PSNR change 14.1162 -> 22.5614
+34, PSNR change 14.1703 -> 26.4253
+35, PSNR change 14.1336 -> 24.1728
+36, PSNR change 14.1481 -> 24.7462
+37, PSNR change 14.1775 -> 24.3599
+38, PSNR change 14.1236 -> 24.8876
+39, PSNR change 14.1477 -> 25.9173
+40, PSNR change 14.1641 -> 23.9557
+41, PSNR change 14.162 -> 23.2072
+42, PSNR change 14.1569 -> 24.0488
+43, PSNR change 14.15 -> 24.415
+44, PSNR change 14.1584 -> 22.3877
+45, PSNR change 14.1564 -> 26.7758
+46, PSNR change 14.1399 -> 21.7124
+47, PSNR change 14.1363 -> 23.0616
+48, PSNR change 14.1732 -> 23.4866
+49, PSNR change 14.1388 -> 25.7811
+50, PSNR change 14.1272 -> 23.0072
+51, PSNR change 14.1413 -> 22.0859
+52, PSNR change 14.1234 -> 26.2219
+53, PSNR change 14.1527 -> 26.1981
+54, PSNR change 14.1635 -> 24.1586
+55, PSNR change 14.1554 -> 23.3983
+56, PSNR change 14.1431 -> 20.3389
+57, PSNR change 14.1713 -> 24.5313
+58, PSNR change 14.159 -> 26.0411
+59, PSNR change 14.1732 -> 25.6654
+60, PSNR change 14.1386 -> 26.1735
+61, PSNR change 14.1733 -> 25.2029
+62, PSNR change 14.1476 -> 25.7932
+63, PSNR change 14.1848 -> 22.4691
+64, PSNR change 14.1441 -> 23.4343
+65, PSNR change 14.1905 -> 24.4906
+66, PSNR change 14.1594 -> 27.129
+67, PSNR change 14.162 -> 20.6013
+68, PSNR change 14.1416 -> 21.3199
+69, PSNR change 14.1834 -> 25.0423
+70, PSNR change 14.1732 -> 25.436
+71, PSNR change 14.1423 -> 23.2588
+72, PSNR change 14.1535 -> 24.3077
+73, PSNR change 14.1469 -> 23.5908
+74, PSNR change 14.1205 -> 22.5832
+75, PSNR change 14.1313 -> 25.5159
+76, PSNR change 14.1393 -> 22.0359
+77, PSNR change 14.1282 -> 25.3082
+78, PSNR change 14.1584 -> 25.484
+79, PSNR change 14.1311 -> 26.2068
+80, PSNR change 14.1521 -> 28.8682
+81, PSNR change 14.14 -> 24.6726
+82, PSNR change 14.118 -> 21.2259
+83, PSNR change 14.1513 -> 20.5911
+84, PSNR change 14.1523 -> 22.8036
+85, PSNR change 14.157 -> 23.0722
+86, PSNR change 14.1894 -> 24.3405
+87, PSNR change 14.1345 -> 25.5644
+88, PSNR change 14.1125 -> 24.0986
+89, PSNR change 14.1643 -> 23.4363
+90, PSNR change 14.1335 -> 25.1427
+91, PSNR change 14.1494 -> 23.5672
+92, PSNR change 14.152 -> 25.58
+93, PSNR change 14.1112 -> 23.3532
+94, PSNR change 14.1241 -> 23.5227
+95, PSNR change 14.1629 -> 20.6131
+96, PSNR change 14.1536 -> 24.1045
+97, PSNR change 14.147 -> 23.5354
+98, PSNR change 14.1666 -> 23.9254
+99, PSNR change 14.1561 -> 22.6386
+
+sda without pretraining, epoch = 1
+0, PSNR change 14.1485 -> 19.9443
+1, PSNR change 14.1607 -> 16.2009
+2, PSNR change 14.1768 -> 21.4337
+3, PSNR change 14.1234 -> 25.0118
+4, PSNR change 14.156 -> 17.1628
+5, PSNR change 14.1555 -> 17.851
+6, PSNR change 14.1457 -> 23.5254
+7, PSNR change 14.1606 -> 21.7849
+8, PSNR change 14.166 -> 23.1596
+9, PSNR change 14.1203 -> 24.589
+10, PSNR change 14.1367 -> 20.0108
+11, PSNR change 14.1572 -> 24.5533
+12, PSNR change 14.1398 -> 23.7201
+13, PSNR change 14.1582 -> 23.1306
+14, PSNR change 14.1673 -> 21.2263
+15, PSNR change 14.1209 -> 21.2787
+16, PSNR change 14.1276 -> 25.1965
+17, PSNR change 14.1473 -> 25.4441
+18, PSNR change 14.1548 -> 19.9952
+19, PSNR change 14.163 -> 20.9845
+20, PSNR change 14.1421 -> 18.185
+21, PSNR change 14.1583 -> 20.9485
+22, PSNR change 14.1449 -> 22.5115
+23, PSNR change 14.1343 -> 19.5981
+24, PSNR change 14.1733 -> 20.4358
+25, PSNR change 14.1492 -> 23.7719
+26, PSNR change 14.1423 -> 20.4643
+27, PSNR change 14.135 -> 25.581
+28, PSNR change 14.1575 -> 14.7184
+29, PSNR change 14.1586 -> 18.7566
+30, PSNR change 14.1769 -> 25.0514
+31, PSNR change 14.1139 -> 20.3589
+32, PSNR change 14.1399 -> 22.8057
+33, PSNR change 14.1162 -> 20.6969
+34, PSNR change 14.1703 -> 18.0688
+35, PSNR change 14.1336 -> 22.6624
+36, PSNR change 14.1481 -> 24.6296
+37, PSNR change 14.1775 -> 19.9985
+38, PSNR change 14.1236 -> 22.387
+39, PSNR change 14.1477 -> 24.2404
+40, PSNR change 14.1641 -> 19.414
+41, PSNR change 14.162 -> 20.6837
+42, PSNR change 14.1569 -> 23.043
+43, PSNR change 14.15 -> 22.3937
+44, PSNR change 14.1584 -> 20.0693
+45, PSNR change 14.1564 -> 26.7854
+46, PSNR change 14.1399 -> 19.3132
+47, PSNR change 14.1363 -> 22.6216
+48, PSNR change 14.1732 -> 17.7857
+49, PSNR change 14.1388 -> 17.5085
+50, PSNR change 14.1272 -> 17.8841
+51, PSNR change 14.1413 -> 22.2682
+52, PSNR change 14.1234 -> 16.9919
+53, PSNR change 14.1527 -> 22.8933
+54, PSNR change 14.1635 -> 20.7894
+55, PSNR change 14.1554 -> 21.5046
+56, PSNR change 14.1431 -> 19.3297
+57, PSNR change 14.1713 -> 24.547
+58, PSNR change 14.159 -> 26.2509
+59, PSNR change 14.1732 -> 25.3025
+60, PSNR change 14.1386 -> 26.308
+61, PSNR change 14.1733 -> 23.2616
+62, PSNR change 14.1476 -> 23.5023
+63, PSNR change 14.1848 -> 21.9008
+64, PSNR change 14.1441 -> 22.3732
+65, PSNR change 14.1905 -> 21.4843
+66, PSNR change 14.1594 -> 27.0843
+67, PSNR change 14.162 -> 19.4623
+68, PSNR change 14.1416 -> 15.4157
+69, PSNR change 14.1834 -> 24.2728
+70, PSNR change 14.1732 -> 25.5213
+71, PSNR change 14.1423 -> 21.0136
+72, PSNR change 14.1535 -> 24.3021
+73, PSNR change 14.1469 -> 18.4255
+74, PSNR change 14.1205 -> 20.6232
+75, PSNR change 14.1313 -> 22.9385
+76, PSNR change 14.1393 -> 20.4619
+77, PSNR change 14.1282 -> 22.197
+78, PSNR change 14.1584 -> 21.7658
+79, PSNR change 14.1311 -> 26.1071
+80, PSNR change 14.1521 -> 26.0154
+81, PSNR change 14.14 -> 24.7239
+82, PSNR change 14.118 -> 20.5628
+83, PSNR change 14.1513 -> 20.6445
+84, PSNR change 14.1523 -> 16.5296
+85, PSNR change 14.157 -> 22.3388
+86, PSNR change 14.1894 -> 23.5239
+87, PSNR change 14.1345 -> 24.9128
+88, PSNR change 14.1125 -> 23.8977
+89, PSNR change 14.1643 -> 23.516
+90, PSNR change 14.1335 -> 23.9109
+91, PSNR change 14.1494 -> 18.5345
+92, PSNR change 14.152 -> 25.3214
+93, PSNR change 14.1112 -> 18.5212
+94, PSNR change 14.1241 -> 23.2608
+95, PSNR change 14.1629 -> 20.1224
+96, PSNR change 14.1536 -> 24.0901
+97, PSNR change 14.147 -> 19.9455
+98, PSNR change 14.1666 -> 22.4428
+99, PSNR change 14.1561 -> 17.4396
+
+sda with pretraining, epoch = 1
+0, PSNR change 14.1485 -> 21.7754
+1, PSNR change 14.1607 -> 23.7534
+2, PSNR change 14.1768 -> 23.4469
+3, PSNR change 14.1234 -> 25.6637
+4, PSNR change 14.156 -> 23.0874
+5, PSNR change 14.1555 -> 24.7188
+6, PSNR change 14.1457 -> 24.0066
+7, PSNR change 14.1606 -> 22.2032
+8, PSNR change 14.166 -> 24.5291
+9, PSNR change 14.1203 -> 25.154
+10, PSNR change 14.1367 -> 21.649
+11, PSNR change 14.1572 -> 24.5784
+12, PSNR change 14.1398 -> 24.6716
+13, PSNR change 14.1582 -> 25.2193
+14, PSNR change 14.1673 -> 22.9412
+15, PSNR change 14.1209 -> 22.5408
+16, PSNR change 14.1276 -> 25.8859
+17, PSNR change 14.1473 -> 25.9697
+18, PSNR change 14.1548 -> 22.832
+19, PSNR change 14.163 -> 22.8063
+20, PSNR change 14.1421 -> 20.4802
+21, PSNR change 14.1583 -> 21.8609
+22, PSNR change 14.1449 -> 22.6767
+23, PSNR change 14.1343 -> 22.6458
+24, PSNR change 14.1733 -> 22.8032
+25, PSNR change 14.1492 -> 24.2856
+26, PSNR change 14.1423 -> 23.7893
+27, PSNR change 14.135 -> 25.5708
+28, PSNR change 14.1575 -> 22.9761
+29, PSNR change 14.1586 -> 19.4432
+30, PSNR change 14.1769 -> 25.1065
+31, PSNR change 14.1139 -> 20.387
+32, PSNR change 14.1399 -> 22.9898
+33, PSNR change 14.1162 -> 22.2491
+34, PSNR change 14.1703 -> 24.4996
+35, PSNR change 14.1336 -> 23.9569
+36, PSNR change 14.1481 -> 24.8838
+37, PSNR change 14.1775 -> 22.8908
+38, PSNR change 14.1236 -> 24.513
+39, PSNR change 14.1477 -> 25.3359
+40, PSNR change 14.1641 -> 23.6214
+41, PSNR change 14.162 -> 22.7483
+42, PSNR change 14.1569 -> 23.7468
+43, PSNR change 14.15 -> 24.026
+44, PSNR change 14.1584 -> 21.61
+45, PSNR change 14.1564 -> 26.8653
+46, PSNR change 14.1399 -> 21.4825
+47, PSNR change 14.1363 -> 23.0322
+48, PSNR change 14.1732 -> 22.5905
+49, PSNR change 14.1388 -> 24.5609
+50, PSNR change 14.1272 -> 22.3922
+51, PSNR change 14.1413 -> 22.6049
+52, PSNR change 14.1234 -> 24.563
+53, PSNR change 14.1527 -> 24.9694
+54, PSNR change 14.1635 -> 23.29
+55, PSNR change 14.1554 -> 23.203
+56, PSNR change 14.1431 -> 20.1611
+57, PSNR change 14.1713 -> 24.5693
+58, PSNR change 14.159 -> 26.028
+59, PSNR change 14.1732 -> 25.4474
+60, PSNR change 14.1386 -> 26.3403
+61, PSNR change 14.1733 -> 24.9625
+62, PSNR change 14.1476 -> 24.5366
+63, PSNR change 14.1848 -> 22.3012
+64, PSNR change 14.1441 -> 23.1427
+65, PSNR change 14.1905 -> 23.7976
+66, PSNR change 14.1594 -> 27.3492
+67, PSNR change 14.162 -> 20.4754
+68, PSNR change 14.1416 -> 20.9211
+69, PSNR change 14.1834 -> 25.0824
+70, PSNR change 14.1732 -> 25.5711
+71, PSNR change 14.1423 -> 22.9411
+72, PSNR change 14.1535 -> 24.3214
+73, PSNR change 14.1469 -> 22.6453
+74, PSNR change 14.1205 -> 22.1513
+75, PSNR change 14.1313 -> 24.2564
+76, PSNR change 14.1393 -> 21.6274
+77, PSNR change 14.1282 -> 24.2751
+78, PSNR change 14.1584 -> 23.8502
+79, PSNR change 14.1311 -> 26.1628
+80, PSNR change 14.1521 -> 27.8999
+81, PSNR change 14.14 -> 24.694
+82, PSNR change 14.118 -> 21.273
+83, PSNR change 14.1513 -> 20.7174
+84, PSNR change 14.1523 -> 22.1889
+85, PSNR change 14.157 -> 23.0677
+86, PSNR change 14.1894 -> 23.9356
+87, PSNR change 14.1345 -> 25.2334
+88, PSNR change 14.1125 -> 24.0067
+89, PSNR change 14.1643 -> 23.5194
+90, PSNR change 14.1335 -> 24.7823
+91, PSNR change 14.1494 -> 22.6034
+92, PSNR change 14.152 -> 25.5891
+93, PSNR change 14.1112 -> 22.5477
+94, PSNR change 14.1241 -> 23.5335
+95, PSNR change 14.1629 -> 20.5489
+96, PSNR change 14.1536 -> 24.1358
+97, PSNR change 14.147 -> 22.8731
+98, PSNR change 14.1666 -> 23.2826
+99, PSNR change 14.1561 -> 21.9546
+
+overfitting?
+1503977 batch, error is 0.00437433
+1503978 batch, error is 0.00867288
+1503979 batch, error is 0.00636472
+1503980 batch, error is 0.00823247
+1503981 batch, error is 0.0072516
+1503982 batch, error is 0.0101694
+1503983 batch, error is 0.0100327
+1503984 batch, error is 0.00536698
+1503985 batch, error is 0.00373279
+1503986 batch, error is 0.00419987
+1503987 batch, error is 0.00466104
+1503988 batch, error is 0.00325387
+1503989 batch, error is 0.00767464
+1503990 batch, error is 0.00522237
+1503991 batch, error is 0.00457594
+1503992 batch, error is 0.00231404
+1503993 batch, error is 0.00422851
+1503994 batch, error is 0.00829695
+1503995 batch, error is 0.00703926
+1503996 batch, error is 0.00788322
+1503997 batch, error is 0.00904876
+1503998 batch, error is 0.0114294
+1503999 batch, error is 0.0103205
+
+1503977 batch, error is 0.00722093
+1 epoch to go
+1503978 batch, error is 0.0154783
+1 epoch to go
+1503979 batch, error is 0.0385872
+1 epoch to go
+1503980 batch, error is 0.0263453
+1 epoch to go
+1503981 batch, error is 0.0348638
+1 epoch to go
+1503982 batch, error is 0.022904
+1 epoch to go
+1503983 batch, error is 0.0233813
+1 epoch to go
+1503984 batch, error is 0.0144244
+1 epoch to go
+1503985 batch, error is 0.0150983
+1 epoch to go
+1503986 batch, error is 0.0106309
+1 epoch to go
+1503987 batch, error is 0.0106796
+1 epoch to go
+1503988 batch, error is 0.0168723
+1 epoch to go
+1503989 batch, error is 0.0181255
+1 epoch to go
+1503990 batch, error is 0.0132223
+1 epoch to go
+1503991 batch, error is 0.00737304
+1 epoch to go
+1503992 batch, error is 0.00599893
+1 epoch to go
+1503993 batch, error is 0.00765828
+1 epoch to go
+1503994 batch, error is 0.0190892
+1 epoch to go
+1503995 batch, error is 0.0343699
+1 epoch to go
+1503996 batch, error is 0.0254389
+1 epoch to go
+1503997 batch, error is 0.0347127
+1 epoch to go
+1503998 batch, error is 0.0238093
+1 epoch to go
+1503999 batch, error is 0.0206464
+1 epoch to go

@@ -140,7 +140,7 @@ class ImReader(object):
                 d = mat_load(self.path + '/' + file)
                 corrupted = self.im2col(d['corrupted'], patch_sz)
                 original = self.im2col(d['original'], patch_sz)
-                for i in xrange(batch_sz - 1, batch_sz, corrupted.shape[1]):
+                for i in xrange(batch_sz - 1, corrupted.shape[1], batch_sz):
                     yield corrupted[:, i - batch_sz + 1: i + 1].T, original[:, i - batch_sz + 1: i + 1].T
 
 
@@ -209,8 +209,15 @@ class ImReader(object):
 
 if __name__ == '__main__':
     ir = ImReader("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/train")
-    for x,y in ir.read_mat():
-        print np.sum(x[0] - ir.reconstruct(ir.im2col(x[0], 6), 6, x[0].shape))
+    count = 0
+    for x,y in ir.read_patch(20):
+        print count, x.shape
+        count += 1
+        if count > 100:
+            break
+    # for x,y in ir.read_mat():
+        # print np.sum(x[0] - ir.reconstruct(ir.im2col(x[0], 6), 6, x[0].shape))
+        # print ir.im2col(x[0], 6).shape
     # corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/train")
     # corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/test")
     # corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
