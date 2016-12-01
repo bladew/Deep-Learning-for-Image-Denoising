@@ -107,7 +107,7 @@ def train(images, restore_path):
 
 def save():
 	# save pretrained result of layer 1
-	save_path = saver.save(sess, "./models/model-4")
+	save_path = saver.save(sess, "./models/with_pretrain/model-4")
 	print("Model saved in file: %s" % save_path)
 	return save_path
 

@@ -22,4 +22,4 @@ if __name__ == "__main__":
 		restore_path4 = pretrain4.save()
 
 	else:
-		pretrain4.test("./models/model-4")
+		pretrain4.test("./models/with_pretrain/model-4")
