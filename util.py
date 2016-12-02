@@ -65,23 +65,6 @@ def corrupt(dir_path):
             mat_save(name.replace(".png", ".mat"), img + np.random.normal(0, 50/255.0, img.shape), img)
 
 
-def select_img(pic_list, dir_path):
-    '''
-    Select images from the given path according to the list
-    UNDER CONSTRUCTION
-
-    pic_list: the txt filename containing target image names
-    dir_path: the path holding images
-    '''
-    # if not os.path.exists(dir_path + "/" + "vol68"):
-    #     os.makedirs(dir_path + "/" + "vol68")
-
-    # with open(pic_list, 'r') as list_file:
-    #     for img in list_file:
-    #         print 
-    pass
-
-
 class ImReader(object):
     '''
     Iterator for reading in images from the given path 
@@ -208,17 +191,4 @@ class ImReader(object):
         return I
 
 if __name__ == '__main__':
-    ir = ImReader("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/train")
-    count = 0
-    for x,y in ir.read_patch(20):
-        print count, x.shape
-        count += 1
-        if count > 100:
-            break
-    # for x,y in ir.read_mat():
-        # print np.sum(x[0] - ir.reconstruct(ir.im2col(x[0], 6), 6, x[0].shape))
-        # print ir.im2col(x[0], 6).shape
-    # corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/train")
-    # corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/test")
-    # corrupt("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
-    # # select_img("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val68.txt", "/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
+    pass
