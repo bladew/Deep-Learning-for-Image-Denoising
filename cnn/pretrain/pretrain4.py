@@ -96,31 +96,23 @@ def train(images, restore_path):
 	'''
 	restorer.restore(sess, restore_path)
 
-	for epoch in range(10):
+	with open('error/four_layer_with_pretrain_train_err.csv', mode='wb') as f:
 		tol_err = 0
-		for step in range(len(images) / 6 + 1):
-			trainX, trainY = train_utils.get_next_batch(images, hidden_layer_size = 4)
-			_, err = sess.run([train_step, loss], feed_dict={x: trainX, y_: trainY, training: True, vertical: None, keep_prob: 8.0/24.0})
-			tol_err += err
+		count = 0
+		for epoch in range(2000):
+			print epoch
 
-		print epoch, tol_err / step
+			for step in range(len(images) / 6 + 1):
+				trainX, trainY = train_utils.get_next_batch(images, hidden_layer_size = 4)
+				_, err = sess.run([train_step, loss], feed_dict={x: trainX, y_: trainY, training: True, vertical: None, keep_prob: 8.0/24.0})
+				tol_err += err
+				count += 1
+
+			print epoch, tol_err / count 
+			f.write(str(epoch) + ',' + str(tol_err / count) + '\n')
 
 def save():
 	# save pretrained result of layer 1
-	save_path = saver.save(sess, "./models/with_pretrain/model-4")
+	save_path = saver.save(sess, "./models/model-4")
 	print("Model saved in file: %s" % save_path)
 	return save_path
-
-def test(restore_path):
-	saver.restore(sess, restore_path)
-
-	count = 0
-	for image in util.ImReader("../images/val").read_mat():
-		corrupted, original = image[0][0], image[1][0]
-		recovered = sess.run(y_image, feed_dict={x: corrupted.reshape(1, 321*481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (481, 321), training: False, keep_prob: 1.0})
-		recovered = recovered.reshape(321, 481) if corrupted.shape == (321, 481) else recovered.reshape(481, 321)
-		util.imsave(original, "../images/result_pretrain/"+str(count)+"_original.PNG")
-		util.imsave(corrupted, "../images/result_pretrain/"+str(count)+"_corrupted.PNG")
-		util.imsave(recovered, "../images/result_pretrain/"+str(count)+"_recovered.PNG")
-		print count, "corrupted:", util.calcPSNR(corrupted, original), "recovered:", util.calcPSNR(recovered, original)
-		count += 1

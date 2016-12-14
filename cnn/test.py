@@ -35,7 +35,18 @@ def get_next_batch(batch_size):
 		m = randint(0, nRow - 26)
 		n = randint(0, nCol - 26)	
 		X.append(corrupted[m:m+26,n:n+26].reshape(26 * 26))
-		y.append(original[m+12:m+14,n+12:n+14].reshape(2 * 2))
+		y.append(original[m+10:m+16,n+10:n+16].reshape(6 * 6))
+	return X, y
+
+def get_next_batch22(batch_size):
+	X, y = [], []
+	for image in random.sample(images, batch_size):
+		corrupted, original = image[0][0], image[1][0]
+		nRow, nCol = corrupted.shape
+		m = randint(0, nRow - 22)
+		n = randint(0, nCol - 22)	
+		X.append(corrupted[m:m+22,n:n+22].reshape(22 * 22))
+		y.append(original[m+8:m+14,n+8:n+14].reshape(6 * 6))
 	return X, y
 
 images = []
@@ -50,7 +61,7 @@ keep_prob = tf.placeholder(tf.float32)
 training = tf.placeholder(tf.bool)
 vertical = tf.placeholder(tf.bool)
 x = tf.cond(training, lambda: tf.placeholder(tf.float32, shape=[None, 26 * 26]), lambda: tf.placeholder(tf.float32, shape=[None, 321 * 481]))
-y_ = tf.cond(training, lambda: tf.placeholder(tf.float32, shape=[None, 2 * 2]), lambda: tf.placeholder(tf.float32, shape=[None, 321 * 481]))
+y_ = tf.cond(training, lambda: tf.placeholder(tf.float32, shape=[None, 6 * 6]), lambda: tf.placeholder(tf.float32, shape=[None, 321 * 481]))
 
 # First layer
 x_image = tf.cond(training,
@@ -80,20 +91,14 @@ h_conv3_drop = tf.nn.dropout(h_conv3, keep_prob)
 W_conv4 = weight_variable([5, 5, 24, 24], name='W_conv4')
 b_conv4 = bias_variable([24], name='b_conv4')
 h_conv4 = tf.sigmoid(conv2d(h_conv3_drop, W_conv4, training) + b_conv4)
-h_conv4_drop = tf.nn.dropout(h_conv4, keep_prob)
-
-# Fifth layer
-W_conv5 = weight_variable([5, 5, 24, 24], name='W_conv5')
-b_conv5 = bias_variable([24], name='b_conv5')
-h_conv5 = tf.sigmoid(conv2d(h_conv4_drop, W_conv5, training) + b_conv5)
 
 # Last layer
-W_conv6 = weight_variable([5, 5, 24, 1], name='W_conv6')
-b_conv6 = bias_variable([1], name='b_conv6')
-y_image = tf.sigmoid(conv2d(h_conv5, W_conv6, training) + b_conv6)
+W_conv5 = weight_variable([5, 5, 24, 1], name='W_conv5')
+b_conv5 = bias_variable([1], name='b_conv5')
+y_image = tf.sigmoid(conv2d(h_conv4, W_conv5, training) + b_conv5)
 
 y = tf.cond(training,
-	lambda: tf.reshape(y_image, [-1, 2 * 2]),
+	lambda: tf.reshape(y_image, [-1, 6 * 6]),
 	lambda: tf.reshape(y_image, [-1, 321 * 481]))
 
 # Calculate the loss function by mean square cost
@@ -113,37 +118,25 @@ saver = tf.train.Saver({
 	'W_conv4': W_conv4,
 	'b_conv4': b_conv4,
 	'W_conv5': W_conv5,
-	'b_conv5': b_conv5,
-	'W_conv6': W_conv6,
-	'b_conv6': b_conv6
-
+	'b_conv5': b_conv5
 })
-
-# use images in ./train and ./test as training dataset
-for epoch in range(4):
-	tol_err = 0
-	for step in range(len(images) / 6 + 1):
-		trainX, trainY = get_next_batch(6)
-		_, err = sess.run([train_step, loss], feed_dict={x: trainX, y_: trainY, training: True, vertical: None, keep_prob: 8.0 / 24})
-		tol_err += err
-
-	print epoch, tol_err / step
-	
-	if epoch != 0 and (epoch + 1) % 1000 == 0:
-		save_path = saver.save(sess, "./models/without_pretrain/model-5layers", global_step=epoch)
-		print("Model saved in file: %s" % save_path)
-
-			
-# saver.restore(sess,"./models/without_pretrain/model-5layers"),
+saver.restore(sess, "models/model-4")
 
 
-count = 0
-for image in util.ImReader("../images/val").read_mat():
-	corrupted, original = image[0][0], image[1][0]
-	recovered = sess.run(y_image, feed_dict={x: corrupted.reshape(1, 321*481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (481, 321), training: False, keep_prob: 1.0})
-	recovered = recovered.reshape(321, 481) if corrupted.shape == (321, 481) else recovered.reshape(481, 321)
-	util.imsave(original, "../images/result3/"+str(count)+"_original.PNG")
-	util.imsave(corrupted, "../images/result3/"+str(count)+"_corrupted.PNG")
-	util.imsave(recovered, "../images/result3/"+str(count)+"_recovered.PNG")
-	print count, "corrupted:", util.calcPSNR(corrupted, original), "recovered:", util.calcPSNR(recovered, original)
-	count += 1
+with open('psnr/four_layer_with_pretrain_psnr.csv', mode='wb') as f:
+	count = 0
+	for image in util.ImReader("../images/val").read_mat():
+		corrupted, original = image[0][0], image[1][0]
+		recovered = sess.run(y_image, feed_dict={x: corrupted.reshape(1, 321*481), y_: original.reshape(1, 321 * 481), vertical: corrupted.shape == (481, 321), training: False, keep_prob: 1.0})
+		recovered = recovered.reshape(321, 481) if corrupted.shape == (321, 481) else recovered.reshape(481, 321)
+		corruptedPSNR = util.calcPSNR(corrupted, original)
+		recoveredPSNR = util.calcPSNR(recovered, original)
+		#util.imsave(original, "../images/result3/"+str(count)+"_original.PNG")
+		#util.imsave(corrupted, "../images/result3/"+str(count)+"_corrupted.PNG")
+		util.imsave(recovered, "result/four_layer_with_pretraining/"+str(count)+"_recovered.PNG")
+		f.write(str(count) + ',' + str(corruptedPSNR) + ',' + str(recoveredPSNR) + '\n')
+		print count, corruptedPSNR, recoveredPSNR
+		count += 1
+
+#for x, y in util.ImReader("../images/val").read_mat():
+#	print util.calcPSNR(x[0], y[0])

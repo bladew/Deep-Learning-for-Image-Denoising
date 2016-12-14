@@ -41,6 +41,20 @@ def get_next_batch(images, hidden_layer_size, batch_size=6):
 				.reshape(final_patch_size * final_patch_size))
 	return X, y
 
+def get_next_batch18(images, hidden_layer_size, batch_size=6):
+	final_patch_size = 18 - (hidden_layer_size+1) * 4
+	X, y = [], []
+	for image in random.sample(images, batch_size):
+		corrupted, original = image[0][0], image[1][0]
+		nRow, nCol = corrupted.shape
+		m = randint(0, nRow - 18)
+		n = randint(0, nCol - 18)	
+		X.append(corrupted[m:m+18,n:n+18].reshape(18 * 18))
+		y.append(original[m + 9 - final_patch_size/2: m + 9 + final_patch_size/2,
+				n + 9 - final_patch_size/2: n + 9 + final_patch_size/2]
+				.reshape(final_patch_size * final_patch_size))
+	return X, y
+
 def read_images():
 	images = []
 	for image in util.ImReader("../images/train").read_mat():

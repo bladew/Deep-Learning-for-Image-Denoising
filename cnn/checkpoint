@@ -1,0 +1,2 @@
+model_checkpoint_path: "two-layer-model-without-pretrain"
+all_model_checkpoint_paths: "two-layer-model-without-pretrain"

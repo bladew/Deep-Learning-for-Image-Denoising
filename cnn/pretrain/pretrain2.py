@@ -20,7 +20,7 @@ keep_prob = tf.placeholder(tf.float32)
 training = tf.placeholder(tf.bool)
 vertical = tf.placeholder(tf.bool)
 x = tf.cond(training, lambda: tf.placeholder(tf.float32, shape=[None, 26 * 26]), lambda: tf.placeholder(tf.float32, shape=[None, 321 * 481]))
-y_ = tf.cond(training, lambda: tf.placeholder(tf.float32, shape=[None, 6 * 6]), lambda: tf.placeholder(tf.float32, shape=[None, 321 * 481]))
+y_ = tf.cond(training, lambda: tf.placeholder(tf.float32, shape=[None, 14 * 14]), lambda: tf.placeholder(tf.float32, shape=[None, 321 * 481]))
 
 # First layer
 x_image = tf.cond(training,
@@ -74,17 +74,21 @@ def train(images, restore_path):
 	'''
 	restorer.restore(sess, restore_path)
 	
-	for epoch in range(10):
+	with open('error/pretrain2_err.csv', mode='wb') as f:
 		tol_err = 0
-		for step in range(len(images) / 6 + 1):
-			trainX, trainY = train_utils.get_next_batch(images, 2)
-			_, err = sess.run([train_step, loss], feed_dict={x: trainX, y_: trainY, training: True, vertical: None, keep_prob: 8.0/24.0})
-			tol_err += err
+		count = 0
+		for epoch in range(2000):
+			for step in range(len(images) / 6 + 1):
+				trainX, trainY = train_utils.get_next_batch(images, 2)
+				_, err = sess.run([train_step, loss], feed_dict={x: trainX, y_: trainY, training: True, vertical: None, keep_prob: 8.0/24.0})
+				tol_err += err
+				count += 1
 
-		print epoch, tol_err / step
+			print epoch, tol_err / count
+			f.write(str(epoch) + ',' + str(tol_err / count) + '\n')
 	
 def save():
 	# save pretrained result of layer 1
-	save_path = saver.save(sess, "./models/with_pretrain/model-2")
+	save_path = saver.save(sess, "./models/model-2")
 	print("Model saved in file: %s" % save_path)
 	return save_path
