@@ -1,0 +1,10 @@
+<<<<<<< HEAD
+*.aux
+*..bbl
+*.blg
+*.log
+*.synctex.gz
+=======
+images/
+cnn/models
+>>>>>>> cnn

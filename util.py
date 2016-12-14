@@ -25,7 +25,7 @@ def imsave(im, imName):
     im[im<0.0] = 0.0
     im[im>1.0] = 1.0
     I = Image.fromarray(np.uint8(np.round(im * 255)))
-    I.save(imName, 'PNG')
+    I.save(imName)
 
 
 def mat_save(filename, img, original = None):
@@ -62,7 +62,28 @@ def corrupt(dir_path):
         if file.endswith(".png"):
             name = dir_path+'/'+file
             img = imread(name)
+<<<<<<< HEAD
             mat_save(name.replace(".png", ".mat"), img + np.random.normal(0, 50/255.0, img.shape), img)
+=======
+            mat_save(name.replace(".png", ".mat"), img + np.random.normal(0, 50.0/255.0, img.shape), img)
+
+
+def select_img(pic_list, dir_path):
+    '''
+    Select images from the given path according to the list
+    UNDER CONSTRUCTION
+
+    pic_list: the txt filename containing target image names
+    dir_path: the path holding images
+    '''
+    # if not os.path.exists(dir_path + "/" + "vol68"):
+    #     os.makedirs(dir_path + "/" + "vol68")
+
+    # with open(pic_list, 'r') as list_file:
+    #     for img in list_file:
+    #         print 
+    pass
+>>>>>>> cnn
 
 
 class ImReader(object):
@@ -191,4 +212,18 @@ class ImReader(object):
         return I
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     pass
+=======
+    pass
+    # convert("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/train")
+    # convert("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/test")
+    # convert("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
+    # select_img("/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val68.txt", "/home/zwang32/course/cs295k/Deep-Learning-for-Image-Denoising/images/val")
+    corrupt("./images/train")
+    corrupt("./images/test")
+    corrupt("./images/val")
+
+
+
+>>>>>>> cnn
